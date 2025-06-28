@@ -470,5 +470,4 @@
   id: DefaultServerRules
   name: guide-entry-rules
   priority: 60
-  text: "/ServerInfo/Guidebook/ServerRules/RatBite Station/DefaultServerRules.xml""
-  children:
+  text: "/ServerInfo/Guidebook/ServerRules/RatBite Station/DefaultServerRules.xml"
