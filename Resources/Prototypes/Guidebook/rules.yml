@@ -465,3 +465,10 @@
   ruleEntry: true
   priority: 100
   text: "/ServerInfo/Guidebook/ServerRules/BanDurations.xml"
+
+- type: guideEntry # Default for the RatBite SS14 Server.
+  id: DefaultServerRules
+  name: guide-entry-rules
+  priority: 60
+  text: "/ServerInfo/Guidebook/ServerRules/RatBite Station/DefaultServerRules.xml""
+  children:
