@@ -86,11 +86,9 @@
   supervisors: job-supervisors-everyone
   goobcoins: 0 #Goob content
   requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 36000 #10 hrs
-      inverted: true # get a job you bum  
-#  access:
-#  - Maintenance
+     
+  access:
+  - Maintenance
 
 - type: startingGear
   id: PassengerGear
