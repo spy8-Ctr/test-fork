@@ -242,8 +242,4 @@ public sealed partial class CCVars : CVars
     /// </summary>
     public static readonly CVarDef<bool> DebugPow3rDisableParallel =
         CVarDef.Create("debug.pow3r_disable_parallel", true, CVar.SERVERONLY);
-    /// <summary>
-    ///     Default severity for imprisonment # Ratbite
-    /// </summary>
-    public static readonly CVarDef<string> ImprisonmentDefaultSeverity =
-        CVarDef.Create("admin.imprisonment_default_severity", "medium", CVar.ARCHIVE | CVar.SERVER | CVar.REPLICATED);}
+}
