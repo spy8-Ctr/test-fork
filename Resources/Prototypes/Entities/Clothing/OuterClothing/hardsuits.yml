@@ -243,7 +243,7 @@
     sprite: Clothing/OuterClothing/Hardsuits/basic.rsi
   - type: ExplosionResistance
     damageCoefficient: 0.9
-      - type: PressureProtection #Ratbite
+  - type: PressureProtection #Ratbite
     highPressureMultiplier: 0.3
     lowPressureMultiplier: 1000
   - type: TemperatureProtection #Ratbite
