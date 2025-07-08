@@ -2126,6 +2126,56 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
 
         #endregion
 
+        #region PermaBrig
+        /*
+         * PERMA TIME
+         */
+        public async Task<int> GetPermaRoundsLeft(NetUserId userId) // Ratbite
+        {
+            await using var db = await GetDb();
+
+            return await db.DbContext.Player
+                .Where(dbPlayer => dbPlayer.UserId == userId)
+                .Select(dbPlayer => dbPlayer.BrigSentence)
+                .SingleOrDefaultAsync();
+        }
+
+        public async Task SetPermaRoundsLeft(NetUserId userId, int BrigSentence) // Ratbite
+        {
+            await using var db = await GetDb();
+
+            var dbPlayer = await db.DbContext.Player.Where(dbPlayer => dbPlayer.UserId == userId).SingleOrDefaultAsync();
+            if (dbPlayer == null)
+                return;
+
+            dbPlayer.BrigSentence = BrigSentence;
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task<int> GetPPpoints(NetUserId userId) // Ratbite
+        {
+            await using var db = await GetDb();
+
+            return await db.DbContext.Player
+                .Where(dbPlayer => dbPlayer.UserId == userId)
+                .Select(dbPlayer => dbPlayer.PPpoints)
+                .SingleOrDefaultAsync();
+        }
+
+        public async Task SetPPpoints(NetUserId userId, int PPpoints) // Ratbite
+        {
+            await using var db = await GetDb();
+
+            var dbPlayer = await db.DbContext.Player.Where(dbPlayer => dbPlayer.UserId == userId).SingleOrDefaultAsync();
+            if (dbPlayer == null)
+                return;
+
+            dbPlayer.PPpoints = PPpoints;
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        #endregion
+
         public abstract Task SendNotification(DatabaseNotification notification);
 
         // SQLite returns DateTime as Kind=Unspecified, Npgsql actually knows for sure it's Kind=Utc.
