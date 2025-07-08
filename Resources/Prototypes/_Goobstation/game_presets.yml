@@ -189,7 +189,7 @@
     - LavalandStormScheduler
     - SubGamemodesRule
     - IonStormScheduler
-    # - SpaceTrafficControlEventScheduler
+    # - SpaceTrafficControlEventScheduler - Ratbite currently has no shuttle events
 
 - type: gamePreset
   id: SecretPlusLow
