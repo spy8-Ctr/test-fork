@@ -5,9 +5,8 @@ namespace Content.Shared._BRatbite.FiringPin;
 /// <summary>
 /// This is used for...
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class FiringPinComponent : Component
 {
-    [DataField, AutoNetworkedField]
-    public bool Locked = true;
+
 }

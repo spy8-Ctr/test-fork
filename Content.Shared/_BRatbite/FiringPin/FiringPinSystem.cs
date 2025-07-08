@@ -1,5 +1,7 @@
+using Content.Shared.Lock;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Popups;
+using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Events;
 
 namespace Content.Shared._BRatbite.FiringPin;
@@ -18,7 +20,10 @@ public sealed class FiringPinSystem : EntitySystem
 
     private void OnShotAttempted(Entity<FiringPinComponent> ent, ref ShotAttemptedEvent args)
     {
-        if (!ent.Comp.Locked)
+        if (!TryComp<LockComponent>(ent, out var lockComponent))
+            return;
+
+        if (!lockComponent.Locked)
             return;
 
         if (HasComp<MindShieldComponent>(args.User))
