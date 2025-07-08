@@ -1,3 +1,4 @@
+using Content.Shared.Mindshield.Components;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged.Events;
 
@@ -18,6 +19,9 @@ public sealed class FiringPinSystem : EntitySystem
     private void OnShotAttempted(Entity<FiringPinComponent> ent, ref ShotAttemptedEvent args)
     {
         if (!ent.Comp.Locked)
+            return;
+
+        if (HasComp<MindShieldComponent>(args.User))
             return;
 
         Popup.PopupClient(Loc.GetString("firing-pin-cant-fire"), ent, args.User);
