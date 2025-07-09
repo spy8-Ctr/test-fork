@@ -1,5 +1,6 @@
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
+using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -17,16 +18,20 @@ public sealed class LimitWeaponSystem : EntitySystem
     /// <inheritdoc/>
     public override void Initialize()
     {
-        SubscribeLocalEvent<ShotAttemptedEvent>(OnAttemptShoot);
-        SubscribeLocalEvent<LimitWeaponComponent, AttackAttemptEvent>(OnAttemptAttack);
+        SubscribeLocalEvent<LimitWeaponComponent, ShotAttemptedEvent>(OnAttemptShoot);
+        SubscribeLocalEvent<LimitWeaponComponent, AttemptMeleeEvent>(OnAttemptAttack);
     }
 
-    private void OnAttemptAttack(Entity<LimitWeaponComponent> ent, ref AttackAttemptEvent args)
+    private void OnAttemptAttack(Entity<LimitWeaponComponent> ent, ref AttemptMeleeEvent args)
     {
+        if (args.Weapon == ent.Owner)
+            return;
+
         if (ent.Comp.Whitelist == null)
         {
             args.Cancel();
             _popupSystem.PopupClient(ent.Comp.MeleeFail, ent, ent);
+            args.Cancelled = true;
             return;
         }
 
@@ -34,23 +39,24 @@ public sealed class LimitWeaponSystem : EntitySystem
         {
             args.Cancel();
             _popupSystem.PopupClient(ent.Comp.MeleeFail, ent, ent);
+            args.Cancelled = true;
             return;
         }
     }
 
-    private void OnAttemptShoot(ref ShotAttemptedEvent args)
+    private void OnAttemptShoot(Entity<LimitWeaponComponent> ent, ref ShotAttemptedEvent args)
     {
-        if (!TryComp<LimitWeaponComponent>(args.User, out var comp))
+        if (args.Used.Owner == ent.Owner)
             return;
 
-        if (comp.Whitelist == null)
+        if (ent.Comp.Whitelist == null)
         {
             args.Cancel();
             _popupSystem.PopupClient(comp.GunFail, args.User, args.User);
             return;
         }
 
-        if (!_entityWhitelistSystem.IsValid(comp.Whitelist, args.Used))
+        if (!_entityWhitelistSystem.IsValid(ent.Comp.Whitelist, args.Used))
         {
             args.Cancel();
             _popupSystem.PopupClient(comp.GunFail, args.User, args.User);
