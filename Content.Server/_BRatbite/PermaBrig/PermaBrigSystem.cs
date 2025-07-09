@@ -31,6 +31,8 @@ public sealed class PermaBrigSystem : GameRuleSystem<PermaBrigComponent>
     [Dependency] private readonly SharedRoleSystem _roles = default!;
     [Dependency] private readonly PermaBrigManager _permaBrigManager = default!;
 
+    public List<ICommonSession> PermaIndividuals = new();
+
     /// <inheritdoc/>
     public override void Initialize()
     {
@@ -43,13 +45,13 @@ public sealed class PermaBrigSystem : GameRuleSystem<PermaBrigComponent>
     {
         var pool = args.PlayerPool;
 
-        var manualSpawn = new List<ICommonSession>();
+        PermaIndividuals = new List<ICommonSession>();
 
         foreach (var session in pool)
         {
-            manualSpawn.Add(session);
             if (_permaBrigManager.GetBrigSentence(session.UserId) == 0)
                 continue;
+            PermaIndividuals.Add(session);
             Logger.Debug($"Player being sent to perma: {session}");
         }
 
