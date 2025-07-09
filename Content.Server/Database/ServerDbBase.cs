@@ -2126,7 +2126,7 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
 
         #endregion
 
-        #region PermaBrig
+        #region Perma Brig
         /*
          * PERMA TIME
          */
@@ -2140,7 +2140,7 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 .SingleOrDefaultAsync();
         }
 
-        public async Task SetPermaRoundsLeft(NetUserId userId, int BrigSentence) // Ratbite
+        public async Task SetPermaRoundsLeft(NetUserId userId, int brigSentence) // Ratbite
         {
             await using var db = await GetDb();
 
@@ -2148,8 +2148,21 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             if (dbPlayer == null)
                 return;
 
-            dbPlayer.BrigSentence = BrigSentence;
+            dbPlayer.BrigSentence = brigSentence;
             await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task<int> ModifyPermaRoundsLeft(NetUserId userId, int brigSentence) // Goobstation
+        {
+            await using var db = await GetDb();
+
+            var dbPlayer = await db.DbContext.Player.Where(dbPlayer => dbPlayer.UserId == userId).SingleOrDefaultAsync();
+            if (dbPlayer == null)
+                return brigSentence;
+
+            dbPlayer.BrigSentence += brigSentence;
+            await db.DbContext.SaveChangesAsync();
+            return dbPlayer.ServerCurrency;
         }
 
         public async Task<int> GetPPpoints(NetUserId userId) // Ratbite
@@ -2162,7 +2175,7 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 .SingleOrDefaultAsync();
         }
 
-        public async Task SetPPpoints(NetUserId userId, int PPpoints) // Ratbite
+        public async Task SetPPpoints(NetUserId userId, int pppoints) // Ratbite
         {
             await using var db = await GetDb();
 
@@ -2170,8 +2183,21 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             if (dbPlayer == null)
                 return;
 
-            dbPlayer.PPpoints = PPpoints;
+            dbPlayer.PPpoints = pppoints;
             await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task<int> ModifyPPpoints(NetUserId userId, int pppoints) // Goobstation
+        {
+            await using var db = await GetDb();
+
+            var dbPlayer = await db.DbContext.Player.Where(dbPlayer => dbPlayer.UserId == userId).SingleOrDefaultAsync();
+            if (dbPlayer == null)
+                return pppoints;
+
+            dbPlayer.PPpoints += pppoints;
+            await db.DbContext.SaveChangesAsync();
+            return dbPlayer.ServerCurrency;
         }
 
         #endregion
