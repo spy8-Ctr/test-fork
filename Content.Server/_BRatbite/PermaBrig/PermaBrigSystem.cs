@@ -51,7 +51,7 @@ public sealed class PermaBrigSystem : GameRuleSystem<PermaBrigComponent>
 
         SubscribeLocalEvent<RulePlayerSpawningEvent>(OnPlayerSpawning);
         SubscribeLocalEvent<PlayerBeforeSpawnEvent>(OnPlayerBeforeSpawning);
-        SubscribeLocalEvent<RoundEndMessageEvent>(OnRoundEnd);
+        //SubscribeLocalEvent<RoundEndMessageEvent>(OnRoundEnd); Auto decreasing of
 
         _sawmill = Logger.GetSawmill("server_permabrig");
     }
@@ -143,8 +143,8 @@ public sealed class PermaBrigSystem : GameRuleSystem<PermaBrigComponent>
         _admin.UpdatePlayerList(player);
     }
 
-    private void OnRoundEnd(RoundEndMessageEvent ev)
-    {
-
-    }
+    // private void OnRoundEnd(RoundEndMessageEvent ev) Auto decrease of perma sentence not yet implemented
+    // {
+    //
+    // }
 }
