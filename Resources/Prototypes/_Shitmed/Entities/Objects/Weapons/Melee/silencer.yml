@@ -41,3 +41,6 @@
     - ReagentId: MuteToxin
       Quantity: 5
     limit: 10
+  - type: Tag
+    tags:
+    - AbductorWeapon

@@ -42,3 +42,7 @@
   - type: GuideHelp
     guides:
     - Abductors
+  - type: Tag
+    tags:
+    - AbductorWeapon
+
