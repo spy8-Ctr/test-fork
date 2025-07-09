@@ -33,6 +33,7 @@ public sealed class PermaBrigSystem : GameRuleSystem<PermaBrigComponent>
     [Dependency] private readonly PermaBrigManager _permaBrigManager = default!;
 
     public List<ICommonSession> PermaIndividuals = new();
+    private ISawmill _sawmill = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -42,6 +43,8 @@ public sealed class PermaBrigSystem : GameRuleSystem<PermaBrigComponent>
         SubscribeLocalEvent<RulePlayerSpawningEvent>(OnPlayerSpawning);
         SubscribeLocalEvent<PlayerBeforeSpawnEvent>(OnPlayerBeforeSpawning);
         SubscribeLocalEvent<RoundEndMessageEvent>(OnRoundEnd);
+
+        _sawmill = Logger.GetSawmill("server_permabrig");
     }
 
     private void OnPlayerSpawning(RulePlayerSpawningEvent args)
@@ -58,7 +61,7 @@ public sealed class PermaBrigSystem : GameRuleSystem<PermaBrigComponent>
             if (_permaBrigManager.GetBrigSentence(session.UserId) == 0)
                 continue;
             PermaIndividuals.Add(session);
-            Logger.Debug($"Player being sent to perma: {session}");
+            _sawmill.Info($"Player intercepted for perma: {session}");
         }
 
         foreach (var player in PermaIndividuals)
@@ -68,7 +71,7 @@ public sealed class PermaBrigSystem : GameRuleSystem<PermaBrigComponent>
 
             SpawnPrisonerPlayer(player);
 
-            Logger.Debug($"Player sent to perma: {player}");
+            _sawmill.Info($"Player sent to perma: {player}");
         }
     }
 
@@ -89,7 +92,7 @@ public sealed class PermaBrigSystem : GameRuleSystem<PermaBrigComponent>
 
         ev.Handled = true;
 
-        Logger.Debug($"Player sent to perma: {ev.Player}");
+        _sawmill.Info($"Player sent to perma: {ev.Player}");
     }
 
     private void SpawnPrisonerPlayer(ICommonSession player)
