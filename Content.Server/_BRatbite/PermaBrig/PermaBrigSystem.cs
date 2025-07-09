@@ -4,6 +4,7 @@ using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Station.Systems;
+using Content.Shared.GameTicking;
 using Content.Shared.Mind;
 using Content.Shared.Players;
 using Content.Shared.Roles;
@@ -48,6 +49,9 @@ public sealed class PermaBrigSystem : GameRuleSystem<PermaBrigComponent>
         var pool = args.PlayerPool;
 
         PermaIndividuals = new List<ICommonSession>();
+
+        if (!_ticker.IsGameRuleActive<PermaBrigComponent>())
+            return;
 
         foreach (var session in pool)
         {
