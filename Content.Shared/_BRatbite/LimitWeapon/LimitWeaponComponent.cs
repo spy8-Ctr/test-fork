@@ -11,4 +11,10 @@ public sealed partial class LimitWeaponComponent : Component
 {
     [ViewVariables(VVAccess.ReadWrite), DataField, AutoNetworkedField]
     public EntityWhitelist? Whitelist;
+
+    [ViewVariables(VVAccess.ReadWrite), DataField, AutoNetworkedField]
+    public string MeleeFail = "weapon-general-fail";
+
+    [ViewVariables(VVAccess.ReadWrite), DataField, AutoNetworkedField]
+    public string GunFail = "weapon-general-fail";
 }
