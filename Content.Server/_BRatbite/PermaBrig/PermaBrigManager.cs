@@ -141,6 +141,16 @@ namespace Content.Server._BRatbite.PermaBrig
         private int ModifyBrigSentence(NetUserId userId, int amountDelta)
         {
             var result = Task.Run(() => ModifyBrigSentenceAsync(userId, amountDelta)).GetAwaiter().GetResult();
+            if (result >= 50)
+            {
+                AddPPpoints(userId, 1);
+                SetBrigSentence(userId, 0);
+            }
+            else if (result < 0)
+            {
+                SetBrigSentence(userId, 0);
+                result = 0;
+            }
             return result;
         }
 
