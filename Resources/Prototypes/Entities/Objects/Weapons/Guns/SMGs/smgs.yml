@@ -261,6 +261,11 @@
       - oni-cannot-shoot-guns-1
       - oni-cannot-shoot-guns-2
       - oni-cannot-shoot-guns-3
+    - type: FiringPin #Ratbite, mindshield restriction system
+    - type: Lock #Ratbite
+      locked: true
+    - type: AccessReader #Ratbite
+      access: [ [ "Security" ] ]
 
 - type: entity
   name: WT550 autorifle # Goobstation
@@ -326,3 +331,8 @@
   - type: Item
     shape:
     - 0,0,2,1
+  - type: FiringPin #Ratbite, mindshield restriction system
+  - type: Lock #Ratbite
+    locked: true
+  - type: AccessReader #Ratbite
+    access: [ [ "Security" ] ]

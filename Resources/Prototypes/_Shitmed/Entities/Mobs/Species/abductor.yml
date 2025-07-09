@@ -43,6 +43,12 @@
     - CanPilot
     - FootstepSound
     - DoorBumpOpener
+  - type: LimitWeapon
+    whitelist:
+      tags:
+      - AbductorWeapon
+    meleeFail: weapon-melee-fail-abductor
+    gunFail: weapon-gun-fail-abductor
   - type: CollectiveMind
     defaultChannel: Abductormind
     channels:

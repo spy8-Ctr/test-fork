@@ -27,3 +27,7 @@
     - Abductors
   - type: UseDelay
     delay: 1.5
+  - type: Tag
+    tags:
+    - AbductorWeapon
+    - HandCuffs
