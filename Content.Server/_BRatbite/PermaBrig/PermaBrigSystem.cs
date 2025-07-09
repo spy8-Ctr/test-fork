@@ -10,7 +10,9 @@ using Content.Shared.Mind;
 using Content.Shared.Players;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
+using Robust.Server.Audio;
 using Robust.Server.Player;
+using Robust.Shared.Audio;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -35,9 +37,12 @@ public sealed class PermaBrigSystem : GameRuleSystem<PermaBrigComponent>
     [Dependency] private readonly SharedJobSystem _jobs = default!;
     [Dependency] private readonly SharedRoleSystem _roles = default!;
     [Dependency] private readonly PermaBrigManager _permaBrigManager = default!;
+    [Dependency] private readonly AudioSystem _audio = default!;
 
     public HashSet<ICommonSession> PermaIndividuals = new();
     private ISawmill _sawmill = default!;
+
+    private SoundSpecifier? _lockUpSound = new SoundPathSpecifier("/Audio/_BRatbite/PermaBrig/locked_up.ogg");
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -130,6 +135,7 @@ public sealed class PermaBrigSystem : GameRuleSystem<PermaBrigComponent>
         var briefing = Loc.GetString("perma-prisoner-briefing",
             ("rounds", _permaBrigManager.GetBrigSentence(player.UserId)));
 
+        _audio.PlayGlobal(_lockUpSound, player);
         var wrappedMessage = Loc.GetString("chat-manager-server-wrap-message", ("message", briefing));
         _chat.ChatMessageToOne(ChatChannel.Server, briefing, wrappedMessage, default, false, player.Channel,
             Color.Red);
