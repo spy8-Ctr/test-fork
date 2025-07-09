@@ -1,14 +1,16 @@
-using System.Linq;
 using Content.Server.Administration.Systems;
+using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Station.Systems;
+using Content.Shared.Chat;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind;
 using Content.Shared.Players;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Jobs;
+using Robust.Server.Player;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -23,6 +25,8 @@ public sealed class PermaBrigSystem : GameRuleSystem<PermaBrigComponent>
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly IRobustRandom _robustRandom = default!;
+    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly GameTicker _ticker = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly PlayTimeTrackingSystem _playTimeTrackings = default!;
@@ -122,7 +126,19 @@ public sealed class PermaBrigSystem : GameRuleSystem<PermaBrigComponent>
         _admin.UpdatePlayerList(player);
 
         _roles.MindAddJobRole(newMind, silent: false, jobPrototype:"Prisoner");
-        var jobName = _jobs.MindTryGetJobName(newMind);
+
+        var briefing = Loc.GetString("perma-prisoner-briefing",
+            ("rounds", _permaBrigManager.GetBrigSentence(player.UserId)));
+
+        var wrappedMessage = Loc.GetString("chat-manager-server-wrap-message", ("message", briefing));
+        _chat.ChatMessageToOne(ChatChannel.Server, briefing, wrappedMessage, default, false, player.Channel,
+            Color.Red);
+
         _admin.UpdatePlayerList(player);
+    }
+
+    private void OnRoundEnd(RoundEndMessageEvent ev)
+    {
+
     }
 }
