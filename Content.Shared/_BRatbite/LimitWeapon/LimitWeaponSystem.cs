@@ -29,17 +29,15 @@ public sealed class LimitWeaponSystem : EntitySystem
 
         if (ent.Comp.Whitelist == null)
         {
-            args.Cancel();
-            _popupSystem.PopupClient(ent.Comp.MeleeFail, ent, ent);
             args.Cancelled = true;
+            _popupSystem.PopupClient(Loc.GetString(ent.Comp.MeleeFail), ent, ent);
             return;
         }
 
         if (!_entityWhitelistSystem.IsValid(ent.Comp.Whitelist, args.Weapon))
         {
-            args.Cancel();
-            _popupSystem.PopupClient(ent.Comp.MeleeFail, ent, ent);
             args.Cancelled = true;
+            _popupSystem.PopupClient(Loc.GetString(ent.Comp.MeleeFail), ent, ent);
             return;
         }
     }
@@ -52,14 +50,14 @@ public sealed class LimitWeaponSystem : EntitySystem
         if (ent.Comp.Whitelist == null)
         {
             args.Cancel();
-            _popupSystem.PopupClient(comp.GunFail, args.User, args.User);
+            _popupSystem.PopupClient(Loc.GetString(ent.Comp.GunFail), args.User, args.User);
             return;
         }
 
         if (!_entityWhitelistSystem.IsValid(ent.Comp.Whitelist, args.Used))
         {
             args.Cancel();
-            _popupSystem.PopupClient(comp.GunFail, args.User, args.User);
+            _popupSystem.PopupClient(Loc.GetString(ent.Comp.GunFail), args.User, args.User);
             return;
         }
     }
