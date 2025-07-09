@@ -55,35 +55,40 @@ public sealed class PermaBrigSystem : GameRuleSystem<PermaBrigComponent>
             pool.Remove(player);
             GameTicker.PlayerJoinGame(player);
 
-            var stations = _ticker.GetSpawnableStations();
-            _robustRandom.Shuffle(stations);
-            var station = EntityUid.Invalid;
-            if (stations.Count != 0)
-                station = stations[0];
-
-            var character = _ticker.GetPlayerProfile(player);
-
-            var data = player.ContentData();
-
-            var newMind = _mind.CreateMind(data!.UserId, character.Name);
-            _mind.SetUserId(newMind, data.UserId);
-
-            var jobPrototype = _prototypeManager.Index<JobPrototype>("Prisoner");
-
-            _playTimeTrackings.PlayerRolesChanged(player);
-
-            var mobMaybe = _stationSpawning.SpawnPlayerCharacterOnStation(station, "Prisoner", character);
-            DebugTools.AssertNotNull(mobMaybe);
-            var mob = mobMaybe!.Value;
-
-            _mind.TransferTo(newMind, mob);
-            _admin.UpdatePlayerList(player);
-
-            _roles.MindAddJobRole(newMind, silent: false, jobPrototype:"Prisoner");
-            var jobName = _jobs.MindTryGetJobName(newMind);
-            _admin.UpdatePlayerList(player);
+            SpawnPrisonerPlayer(player);
 
             Logger.Debug($"Player sent to perma: {player}");
         }
+    }
+
+    private void SpawnPrisonerPlayer(ICommonSession player)
+    {
+        var stations = _ticker.GetSpawnableStations();
+        _robustRandom.Shuffle(stations);
+        var station = EntityUid.Invalid;
+        if (stations.Count != 0)
+            station = stations[0];
+
+        var character = _ticker.GetPlayerProfile(player);
+
+        var data = player.ContentData();
+
+        var newMind = _mind.CreateMind(data!.UserId, character.Name);
+        _mind.SetUserId(newMind, data.UserId);
+
+        var jobPrototype = _prototypeManager.Index<JobPrototype>("Prisoner");
+
+        _playTimeTrackings.PlayerRolesChanged(player);
+
+        var mobMaybe = _stationSpawning.SpawnPlayerCharacterOnStation(station, "Prisoner", character);
+        DebugTools.AssertNotNull(mobMaybe);
+        var mob = mobMaybe!.Value;
+
+        _mind.TransferTo(newMind, mob);
+        _admin.UpdatePlayerList(player);
+
+        _roles.MindAddJobRole(newMind, silent: false, jobPrototype:"Prisoner");
+        var jobName = _jobs.MindTryGetJobName(newMind);
+        _admin.UpdatePlayerList(player);
     }
 }
