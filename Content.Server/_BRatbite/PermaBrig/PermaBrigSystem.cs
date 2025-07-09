@@ -55,7 +55,7 @@ public sealed class PermaBrigSystem : GameRuleSystem<PermaBrigComponent>
             Logger.Debug($"Player being sent to perma: {session}");
         }
 
-        foreach (var player in manualSpawn)
+        foreach (var player in PermaIndividuals)
         {
             pool.Remove(player);
             GameTicker.PlayerJoinGame(player);
