@@ -17,4 +17,9 @@ public sealed partial class LimitWeaponComponent : Component
 
     [ViewVariables(VVAccess.ReadWrite), DataField, AutoNetworkedField]
     public string GunFail = "weapon-general-fail";
+
+    public TimeSpan LastPopup;
+
+    [DataField]
+    public TimeSpan PopupCooldown = TimeSpan.FromSeconds(1);
 }

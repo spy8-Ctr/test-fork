@@ -1,10 +1,8 @@
-using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
-using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
-using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Whitelist;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._BRatbite.LimitWeapon;
 
@@ -15,6 +13,7 @@ public sealed class LimitWeaponSystem : EntitySystem
 {
     [Dependency] private EntityWhitelistSystem _entityWhitelistSystem = default!;
     [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private IGameTiming _timing = default!;
     /// <inheritdoc/>
     public override void Initialize()
     {
@@ -30,14 +29,14 @@ public sealed class LimitWeaponSystem : EntitySystem
         if (ent.Comp.Whitelist == null)
         {
             args.Cancelled = true;
-            _popupSystem.PopupClient(Loc.GetString(ent.Comp.MeleeFail), ent, ent);
+            ShowPopup(ent.Comp.MeleeFail, ent);
             return;
         }
 
         if (!_entityWhitelistSystem.IsValid(ent.Comp.Whitelist, args.Weapon))
         {
             args.Cancelled = true;
-            _popupSystem.PopupClient(Loc.GetString(ent.Comp.MeleeFail), ent, ent);
+            ShowPopup(ent.Comp.MeleeFail, ent);
             return;
         }
     }
@@ -50,15 +49,26 @@ public sealed class LimitWeaponSystem : EntitySystem
         if (ent.Comp.Whitelist == null)
         {
             args.Cancel();
-            _popupSystem.PopupClient(Loc.GetString(ent.Comp.GunFail), args.User, args.User);
+            ShowPopup(ent.Comp.GunFail, ent);
             return;
         }
 
         if (!_entityWhitelistSystem.IsValid(ent.Comp.Whitelist, args.Used))
         {
             args.Cancel();
-            _popupSystem.PopupClient(Loc.GetString(ent.Comp.GunFail), args.User, args.User);
+            ShowPopup(ent.Comp.GunFail, ent);
             return;
+        }
+    }
+
+    private void ShowPopup(string text, Entity<LimitWeaponComponent> ent)
+    {
+        var time = _timing.CurTime;
+
+        if (time > ent.Comp.LastPopup + ent.Comp.PopupCooldown)
+        {
+            ent.Comp.LastPopup = time;
+            _popupSystem.PopupClient(Loc.GetString(text), ent, ent);
         }
     }
 }
