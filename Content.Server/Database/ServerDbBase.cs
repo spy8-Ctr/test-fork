@@ -2162,7 +2162,7 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
 
             dbPlayer.BrigSentence += brigSentence;
             await db.DbContext.SaveChangesAsync();
-            return dbPlayer.ServerCurrency;
+            return dbPlayer.BrigSentence;
         }
 
         public async Task<int> GetPPpoints(NetUserId userId) // Ratbite
@@ -2197,7 +2197,7 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
 
             dbPlayer.PPpoints += pppoints;
             await db.DbContext.SaveChangesAsync();
-            return dbPlayer.ServerCurrency;
+            return dbPlayer.BrigSentence;
         }
 
         #endregion
