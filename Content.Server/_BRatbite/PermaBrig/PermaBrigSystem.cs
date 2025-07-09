@@ -29,6 +29,7 @@ public sealed class PermaBrigSystem : GameRuleSystem<PermaBrigComponent>
     [Dependency] private readonly AdminSystem _admin = default!;
     [Dependency] private readonly SharedJobSystem _jobs = default!;
     [Dependency] private readonly SharedRoleSystem _roles = default!;
+    [Dependency] private readonly PermaBrigManager _permaBrigManager = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -47,6 +48,8 @@ public sealed class PermaBrigSystem : GameRuleSystem<PermaBrigComponent>
         foreach (var session in pool)
         {
             manualSpawn.Add(session);
+            if (_permaBrigManager.GetBrigSentence(session.UserId) == 0)
+                continue;
             Logger.Debug($"Player being sent to perma: {session}");
         }
 
