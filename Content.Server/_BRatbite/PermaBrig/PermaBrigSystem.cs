@@ -32,7 +32,7 @@ public sealed class PermaBrigSystem : GameRuleSystem<PermaBrigComponent>
     [Dependency] private readonly SharedRoleSystem _roles = default!;
     [Dependency] private readonly PermaBrigManager _permaBrigManager = default!;
 
-    public List<ICommonSession> PermaIndividuals = new();
+    public HashSet<ICommonSession> PermaIndividuals = new();
     private ISawmill _sawmill = default!;
 
     /// <inheritdoc/>
@@ -51,7 +51,7 @@ public sealed class PermaBrigSystem : GameRuleSystem<PermaBrigComponent>
     {
         var pool = args.PlayerPool;
 
-        PermaIndividuals = new List<ICommonSession>();
+        PermaIndividuals = new();
 
         if (!_ticker.IsGameRuleActive<PermaBrigComponent>())
             return;
