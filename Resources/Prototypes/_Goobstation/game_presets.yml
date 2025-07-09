@@ -163,7 +163,7 @@
     - SubGamemodesRule
     - BasicStationEventScheduler
   #  - MeteorSwarmScheduler Goobstation - nuh uh
-    - SpaceTrafficControlEventScheduler
+  #  - SpaceTrafficControlEventScheduler - Ratbite currently has no shuttle events
     - BasicRoundstartVariation
     - LavalandStormScheduler
 
@@ -182,7 +182,7 @@
     - LavalandStormScheduler
     - SubGamemodesRule
     - RareIonStormScheduler
-    - SpaceTrafficControlFriendlyEventScheduler
+    # - SpaceTrafficControlFriendlyEventScheduler - Ratbite currently has no shuttle events
 
 - type: gamePreset
   id: TheGuide
@@ -199,7 +199,7 @@
     - LavalandStormScheduler
     - SubGamemodesRule
     - IonStormScheduler
-    - SpaceTrafficControlEventScheduler
+    # - SpaceTrafficControlEventScheduler - Ratbite currently has no shuttle events
 
 - type: gamePreset
   id: SecretPlusLow

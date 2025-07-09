@@ -38,6 +38,9 @@
     magState: mag
     steps: 5
     zeroVisible: true
+  - type: Tag
+    tags:
+    - AbductorWeapon
 
 - type: entity
   parent: [BaseWeaponBattery, BaseGunWieldable, BaseMajorContraband]
@@ -64,3 +67,6 @@
   - type: Battery
     maxCharge: 2000
     startingCharge: 2000
+  - type: Tag
+    tags:
+    - AbductorWeapon

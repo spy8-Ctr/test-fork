@@ -230,6 +230,9 @@
 # PUT YOUR TAGS IN ALPHABETICAL ORDER
 
 - type: Tag
+  id: AbductorWeapon
+
+- type: Tag
   id: AccessBreakerImmune
 
 - type: Tag
