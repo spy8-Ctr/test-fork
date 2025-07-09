@@ -39,6 +39,8 @@ public sealed class PermaBrigSystem : GameRuleSystem<PermaBrigComponent>
         base.Initialize();
 
         SubscribeLocalEvent<RulePlayerSpawningEvent>(OnPlayerSpawning);
+        SubscribeLocalEvent<PlayerBeforeSpawnEvent>(OnPlayerBeforeSpawning);
+        SubscribeLocalEvent<RoundEndMessageEvent>(OnRoundEnd);
     }
 
     private void OnPlayerSpawning(RulePlayerSpawningEvent args)
@@ -64,6 +66,26 @@ public sealed class PermaBrigSystem : GameRuleSystem<PermaBrigComponent>
 
             Logger.Debug($"Player sent to perma: {player}");
         }
+    }
+
+    private void OnPlayerBeforeSpawning(PlayerBeforeSpawnEvent ev)
+    {
+        if (!_ticker.IsGameRuleActive<PermaBrigComponent>())
+            return;
+
+        if (!ev.LateJoin) //OnPlayerSpawning handles the start round spawning, before traitor picking, so this just needs to handle late joiners.
+            return;
+
+        if (_permaBrigManager.GetBrigSentence(ev.Player.UserId) == 0)
+            return;
+
+        PermaIndividuals.Add(ev.Player);
+
+        SpawnPrisonerPlayer(ev.Player);
+
+        ev.Handled = true;
+
+        Logger.Debug($"Player sent to perma: {ev.Player}");
     }
 
     private void SpawnPrisonerPlayer(ICommonSession player)
