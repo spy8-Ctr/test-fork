@@ -56,8 +56,6 @@
       - id: SurvivalKnife
       - id: HandheldGPSBasic
       - id: RadioHandheld
-      - id: SeismicCharge
-        amount: 2
       - id: Flare
         prob: 0.3
       - id: Flare
@@ -89,8 +87,6 @@
       - id: SurvivalKnife
       - id: HandheldGPSBasic
       - id: RadioHandheld
-      - id: SeismicCharge
-        amount: 2
       - id: Flare
         prob: 0.3
       - id: Flare
