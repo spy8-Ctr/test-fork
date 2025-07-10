@@ -3,6 +3,7 @@ using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Players.PlayTimeTracking;
+using Content.Server.Spawners.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.Chat;
 using Content.Shared.GameTicking;
@@ -13,6 +14,7 @@ using Content.Shared.Roles.Jobs;
 using Robust.Server.Audio;
 using Robust.Server.Player;
 using Robust.Shared.Audio;
+using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -29,6 +31,7 @@ public sealed class PermaBrigSystem : GameRuleSystem<PermaBrigComponent>
     [Dependency] private readonly IRobustRandom _robustRandom = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IChatManager _chat = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly GameTicker _ticker = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly PlayTimeTrackingSystem _playTimeTrackings = default!;
@@ -40,6 +43,7 @@ public sealed class PermaBrigSystem : GameRuleSystem<PermaBrigComponent>
     [Dependency] private readonly AudioSystem _audio = default!;
 
     public HashSet<ICommonSession> PermaIndividuals = new();
+    public Dictionary<ICommonSession, (TimeSpan, TimeSpan)> PermaIndividualJoinedTime = new();
     private ISawmill _sawmill = default!;
 
     private SoundSpecifier? _lockUpSound = new SoundPathSpecifier("/Audio/_BRatbite/PermaBrig/locked_up.ogg");
@@ -104,6 +108,26 @@ public sealed class PermaBrigSystem : GameRuleSystem<PermaBrigComponent>
         _sawmill.Info($"Player sent to perma: {ev.Player}");
     }
 
+    private EntityCoordinates? GetSpawnLocation()
+    {
+        var points = EntityQueryEnumerator<SpawnPointComponent, TransformComponent>();
+        var possiblePositions = new List<EntityCoordinates>();
+
+        while ( points.MoveNext(out var uid, out var spawnPoint, out var xform))
+        {
+            if (spawnPoint.SpawnType == SpawnPointType.Job&&
+                (spawnPoint.Job == "Prisoner"))
+            {
+                possiblePositions.Add(xform.Coordinates);
+            }
+        }
+
+        if (possiblePositions.Count == 0)
+            return null;
+
+        return _random.Pick(possiblePositions);
+    }
+
     private void SpawnPrisonerPlayer(ICommonSession player)
     {
         var stations = _ticker.GetSpawnableStations();
@@ -123,7 +147,26 @@ public sealed class PermaBrigSystem : GameRuleSystem<PermaBrigComponent>
 
         _playTimeTrackings.PlayerRolesChanged(player);
 
-        var mobMaybe = _stationSpawning.SpawnPlayerCharacterOnStation(station, "Prisoner", character);
+        GetSpawnLocation();
+
+        EntityCoordinates? spawnLoc = null;
+        EntityUid? mobMaybe = null;
+
+        spawnLoc = GetSpawnLocation();
+
+        if (spawnLoc!=null)
+        {
+            mobMaybe = _stationSpawning.SpawnPlayerMob(
+                spawnLoc.Value,
+                "Prisoner",
+                character,
+                station);
+        }
+        else
+        {
+            mobMaybe = _stationSpawning.SpawnPlayerCharacterOnStation(station, "Prisoner", character);
+        }
+
         DebugTools.AssertNotNull(mobMaybe);
         var mob = mobMaybe!.Value;
 
