@@ -66,6 +66,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Atmos.EntitySystems;
+using Content.Server.Atmos.Monitor.Components;
 using Content.Server.Atmos.Monitor.Systems;
 using Content.Server.Atmos.Piping.Components;
 using Content.Server.Atmos.Piping.Unary.Components;
@@ -129,6 +130,7 @@ namespace Content.Server.Atmos.Piping.Unary.EntitySystems
             SubscribeLocalEvent<GasVentPumpComponent, WeldableChangedEvent>(OnWeldChanged);
             SubscribeLocalEvent<GasVentPumpComponent, GetVerbsEvent<Verb>>(OnGetVerbs);
             SubscribeLocalEvent<GasVentPumpComponent, VentScrewedDoAfterEvent>(OnVentScrewed);
+            SubscribeLocalEvent<GasVentPumpComponent, AtmosMonitorUpdateAlarmEvent>(OnMonitorUpdateAlarm);
         }
 
         private void OnGasVentPumpUpdated(EntityUid uid, GasVentPumpComponent vent, ref AtmosDeviceUpdateEvent args)
@@ -289,6 +291,12 @@ namespace Content.Server.Atmos.Piping.Unary.EntitySystems
             }
 
             UpdateState(uid, component);
+        }
+
+        private void OnMonitorUpdateAlarm(Entity<GasVentPumpComponent> ent, ref AtmosMonitorUpdateAlarmEvent args)
+        {
+            if (ent.Comp.VentLockout == LockoutState.Gas)
+                args.AlarmType = AtmosAlarmType.Danger;
         }
 
         private void OnPowerChanged(EntityUid uid, GasVentPumpComponent component, ref PowerChangedEvent args)
