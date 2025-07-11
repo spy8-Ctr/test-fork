@@ -57,7 +57,7 @@ namespace Content.Server.Atmos.Piping.Unary.Components
         public VentPressureBound PressureChecks { get; set; } = VentPressureBound.ExternalBound;
 
         [DataField]
-        public bool UnderPressureLockout { get; set; } = false;
+        public LockoutState VentLockout { get; set; } = LockoutState.None;
 
         /// <summary>
         ///     In releasing mode, do not pump when environment pressure is below this limit.
@@ -215,5 +215,13 @@ namespace Content.Server.Atmos.Piping.Unary.Components
         public float DefaultExternalBound => Atmospherics.OneAtmosphere;
 
         #endregion
+    }
+
+    public enum LockoutState : byte
+    {
+        None,
+        Override,
+        Pressure,
+        Gas
     }
 }

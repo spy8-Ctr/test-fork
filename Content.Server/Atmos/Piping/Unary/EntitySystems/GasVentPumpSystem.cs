@@ -168,10 +168,23 @@ namespace Content.Server.Atmos.Piping.Unary.EntitySystems
             var timeDelta = args.dt;
             var pressureDelta = timeDelta * vent.TargetPressureChange;
 
-            var lockout = (environment.Pressure < vent.UnderPressureLockoutThreshold) && !vent.IsPressureLockoutManuallyDisabled;
-            if (vent.UnderPressureLockout != lockout) // update visuals only if this changes
+            var lockout = LockoutState.None;
+
+            if ((environment.Pressure < vent.UnderPressureLockoutThreshold))
+                lockout = LockoutState.Pressure;
+
+            foreach (var gas in vent.GasLockoutGases)
             {
-                vent.UnderPressureLockout = lockout;
+                if (pipe.Air.GetMoles(gas) > 0.3f)
+                {
+                    lockout = LockoutState.Gas;
+                    break;
+                }
+            }
+
+            if (vent.VentLockout != lockout) // update visuals only if this changes
+            {
+                vent.VentLockout = lockout;
                 UpdateState(uid, vent);
             }
 
@@ -199,7 +212,7 @@ namespace Content.Server.Atmos.Piping.Unary.EntitySystems
                 var transferMoles = pressureDelta * environment.Volume / (pipe.Air.Temperature * Atmospherics.R);
 
                 // Only run if the device is under lockout and not being overriden
-                if (vent.UnderPressureLockout & !vent.PressureLockoutOverride & !vent.IsPressureLockoutManuallyDisabled)
+                if ((vent.VentLockout != LockoutState.None) & !vent.PressureLockoutOverride & !vent.IsPressureLockoutManuallyDisabled)
                 {
                     // Leak only a small amount of gas as a proportion of supply pipe pressure.
                     var pipeDelta = pipe.Air.Pressure - environment.Pressure;
@@ -342,6 +355,14 @@ namespace Content.Server.Atmos.Piping.Unary.EntitySystems
                         _adminLogger.Add(LogType.AtmosDeviceSetting, LogImpact.Medium, $"{ToPrettyString(uid)} pressure lockout override {enabled}");
                     }
 
+                    foreach (Gas gas in previous.GasLockoutGases)
+                        if (!setData.GasLockoutGases.Contains(gas))
+                            _adminLogger.Add(LogType.AtmosDeviceSetting, LogImpact.Medium, $"{ToPrettyString(uid)} {gas} lockout disabled");
+
+                    foreach (Gas gas in setData.GasLockoutGases)
+                        if (!previous.GasLockoutGases.Contains(gas))
+                            _adminLogger.Add(LogType.AtmosDeviceSetting, LogImpact.Medium, $"{ToPrettyString(uid)} {gas} lockout enabled");
+
                     component.FromAirAlarmData(setData);
                     UpdateState(uid, component);
 
@@ -394,7 +415,7 @@ namespace Content.Server.Atmos.Piping.Unary.EntitySystems
             }
             else if (vent.PumpDirection == VentPumpDirection.Releasing)
             {
-                if (vent.UnderPressureLockout & !vent.PressureLockoutOverride & !vent.IsPressureLockoutManuallyDisabled)
+                if ((vent.VentLockout != LockoutState.None) & !vent.PressureLockoutOverride & !vent.IsPressureLockoutManuallyDisabled)
                     _appearance.SetData(uid, VentPumpVisuals.State, VentPumpState.Lockout, appearance);
                 else
                     _appearance.SetData(uid, VentPumpVisuals.State, VentPumpState.Out, appearance);
@@ -411,9 +432,22 @@ namespace Content.Server.Atmos.Piping.Unary.EntitySystems
                 return;
             if (args.IsInDetailsRange)
             {
-                if (pumpComponent.PumpDirection == VentPumpDirection.Releasing & pumpComponent.UnderPressureLockout & !pumpComponent.PressureLockoutOverride & !pumpComponent.IsPressureLockoutManuallyDisabled)
+                if (pumpComponent.PumpDirection == VentPumpDirection.Releasing)
                 {
-                    args.PushMarkup(Loc.GetString("gas-vent-pump-uvlo"));
+                    switch (pumpComponent.VentLockout)
+                    {
+                        case LockoutState.None:
+                            break;
+                        case LockoutState.Override:
+                            args.PushMarkup(Loc.GetString("gas-vent-pump-override"));
+                            break;
+                        case LockoutState.Pressure:
+                            args.PushMarkup(Loc.GetString("gas-vent-pump-uvlo"));
+                            break;
+                        case LockoutState.Gas:
+                            args.PushMarkup(Loc.GetString("gas-vent-pump-gaslo"));
+                            break;
+                    }
                 }
             }
         }
@@ -449,7 +483,7 @@ namespace Content.Server.Atmos.Piping.Unary.EntitySystems
 
         private void OnGetVerbs(Entity<GasVentPumpComponent> ent, ref GetVerbsEvent<Verb> args)
         {
-            if (ent.Comp.UnderPressureLockout == false || !Transform(ent).Anchored)
+            if ((ent.Comp.VentLockout != LockoutState.None && ent.Comp.VentLockout != LockoutState.Override) || !Transform(ent).Anchored)
                 return;
 
             var user = args.User;
