@@ -184,6 +184,12 @@ namespace Content.Server.Atmos.Piping.Unary.EntitySystems
                 }
             }
 
+            if (vent.IsPressureLockoutManuallyDisabled)
+                lockout = LockoutState.Override;
+
+            if (vent.PressureLockoutOverride)
+                lockout = LockoutState.None;
+
             if (vent.VentLockout != lockout) // update visuals only if this changes
             {
                 vent.VentLockout = lockout;
@@ -491,7 +497,7 @@ namespace Content.Server.Atmos.Piping.Unary.EntitySystems
 
         private void OnGetVerbs(Entity<GasVentPumpComponent> ent, ref GetVerbsEvent<Verb> args)
         {
-            if ((ent.Comp.VentLockout != LockoutState.None && ent.Comp.VentLockout != LockoutState.Override) || !Transform(ent).Anchored)
+            if ((ent.Comp.VentLockout == LockoutState.None || ent.Comp.VentLockout == LockoutState.Override) || !Transform(ent).Anchored)
                 return;
 
             var user = args.User;
