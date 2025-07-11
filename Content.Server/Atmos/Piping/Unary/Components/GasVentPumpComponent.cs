@@ -84,6 +84,10 @@ namespace Content.Server.Atmos.Piping.Unary.Components
         /// <summary>
         /// Is the vent pressure lockout currently manually disabled?
         /// </summary>
+
+        [DataField]
+        public HashSet<Gas> GasLockoutGases = new(GasVentScrubberData.DefaultFilterGases);
+
         [DataField]
         public bool IsPressureLockoutManuallyDisabled = false;
         /// <summary>
@@ -188,7 +192,8 @@ namespace Content.Server.Atmos.Piping.Unary.Components
                 PressureChecks = PressureChecks,
                 ExternalPressureBound = ExternalPressureBound,
                 InternalPressureBound = InternalPressureBound,
-                PressureLockoutOverride = PressureLockoutOverride
+                PressureLockoutOverride = PressureLockoutOverride,
+                GasLockoutGases = GasLockoutGases //Ratbite - Gas Lockout
             };
         }
 
@@ -201,6 +206,7 @@ namespace Content.Server.Atmos.Piping.Unary.Components
             ExternalPressureBound = data.ExternalPressureBound;
             InternalPressureBound = data.InternalPressureBound;
             PressureLockoutOverride = data.PressureLockoutOverride;
+            GasLockoutGases = data.GasLockoutGases; //Ratbite - Gas Lockout
         }
 
         #region GuidebookData

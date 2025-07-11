@@ -29,6 +29,18 @@ namespace Content.Shared.Atmos.Piping.Unary.Components
         public float InternalPressureBound { get; set; } = 0f;
         public bool PressureLockoutOverride { get; set; } = false;
 
+        public static HashSet<Gas> DefaultLockoutGases = new() // Ratbite - Gas Lockout
+        {
+            Gas.Plasma,
+            Gas.Tritium,
+            Gas.Ammonia,
+            Gas.NitrousOxide,
+            Gas.Frezon,
+            Gas.BZ, // Assmos - /tg/ gases
+        };
+
+        public HashSet<Gas> GasLockoutGases = new(DefaultLockoutGases); //Ratbite - Gase Lockout
+
         // Presets for 'dumb' air alarm modes
 
         public static GasVentPumpData FilterModePreset = new GasVentPumpData
@@ -38,7 +50,8 @@ namespace Content.Shared.Atmos.Piping.Unary.Components
             PressureChecks = VentPressureBound.ExternalBound,
             ExternalPressureBound = Atmospherics.OneAtmosphere,
             InternalPressureBound = 0f,
-            PressureLockoutOverride = false
+            PressureLockoutOverride = false,
+            GasLockoutGases = DefaultLockoutGases //Ratbite - Gas Lockout
         };
 
         public static GasVentPumpData FillModePreset = new GasVentPumpData
@@ -49,7 +62,8 @@ namespace Content.Shared.Atmos.Piping.Unary.Components
             PressureChecks = VentPressureBound.ExternalBound,
             ExternalPressureBound = Atmospherics.OneAtmosphere * 50,
             InternalPressureBound = 0f,
-            PressureLockoutOverride = true
+            PressureLockoutOverride = true,
+            GasLockoutGases = DefaultLockoutGases //Ratbite - Gas Lockout
         };
 
         public static GasVentPumpData PanicModePreset = new GasVentPumpData
@@ -60,7 +74,8 @@ namespace Content.Shared.Atmos.Piping.Unary.Components
             PressureChecks = VentPressureBound.ExternalBound,
             ExternalPressureBound = Atmospherics.OneAtmosphere,
             InternalPressureBound = 0f,
-            PressureLockoutOverride = false
+            PressureLockoutOverride = false,
+            GasLockoutGases = DefaultLockoutGases //Ratbite - Gas Lockout
         };
 
         public static GasVentPumpData ReplaceModePreset = new GasVentPumpData
@@ -72,7 +87,8 @@ namespace Content.Shared.Atmos.Piping.Unary.Components
             PressureChecks = VentPressureBound.ExternalBound,
             ExternalPressureBound = Atmospherics.OneAtmosphere,
             InternalPressureBound = 0f,
-            PressureLockoutOverride = false
+            PressureLockoutOverride = false,
+            GasLockoutGases = DefaultLockoutGases //Ratbite - Gas Lockout
         };
     }
 
