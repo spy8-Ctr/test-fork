@@ -22,6 +22,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Atmos;
+using Content.Shared.Atmos.Monitor;
 using Content.Shared.Atmos.Piping.Unary.Components;
 using Content.Shared.DeviceLinking;
 using Content.Shared.Guidebook;
@@ -87,6 +88,14 @@ namespace Content.Server.Atmos.Piping.Unary.Components
 
         [DataField]
         public HashSet<Gas> GasLockoutGases = new(GasVentScrubberData.DefaultFilterGases);
+
+        [DataField("temperatureLockoutThresholdId", customTypeSerializer: (typeof(PrototypeIdSerializer<AtmosAlarmThresholdPrototype>)))] //Ratbite - Temperature Lockout
+        public string? TemperatureLockoutThresholdId; //Ratbite - Temperature Lockout
+
+        [DataField("temperatureLockoutThreshold")] //Ratbite - Temperature Lockout
+        public AtmosAlarmThreshold? TemperatureLockoutThreshold; //Ratbite - Temperature Lockout
+
+        public float Temperature { get; set; }
 
         [DataField]
         public bool IsPressureLockoutManuallyDisabled = false;
@@ -193,7 +202,8 @@ namespace Content.Server.Atmos.Piping.Unary.Components
                 ExternalPressureBound = ExternalPressureBound,
                 InternalPressureBound = InternalPressureBound,
                 PressureLockoutOverride = PressureLockoutOverride,
-                GasLockoutGases = GasLockoutGases //Ratbite - Gas Lockout
+                GasLockoutGases = GasLockoutGases, //Ratbite - Gas Lockout
+                TemperatureLockoutThreshold = TemperatureLockoutThreshold ?? new AtmosAlarmThreshold(), //Ratbite - Temperature Lockout
             };
         }
 
@@ -207,6 +217,7 @@ namespace Content.Server.Atmos.Piping.Unary.Components
             InternalPressureBound = data.InternalPressureBound;
             PressureLockoutOverride = data.PressureLockoutOverride;
             GasLockoutGases = data.GasLockoutGases; //Ratbite - Gas Lockout
+            TemperatureLockoutThreshold = data.TemperatureLockoutThreshold; //Ratbite - Temperature Lockout
         }
 
         #region GuidebookData
@@ -217,11 +228,12 @@ namespace Content.Server.Atmos.Piping.Unary.Components
         #endregion
     }
 
-    public enum LockoutState : byte
+    public enum LockoutState : byte //Ratbite - Atmos Safety
     {
         None,
         Override,
         Pressure,
+        Temperature, //Ratbite - Temperature Lockout
         Gas
     }
 }

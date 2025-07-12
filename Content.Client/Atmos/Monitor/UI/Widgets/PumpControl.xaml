@@ -63,6 +63,17 @@ SPDX-License-Identifier: MIT
                         <!-- Assmos changes end -->
                     </CollapsibleBody>
                 </Collapsible>
+                <!-- Lowerest row: temperature lockout -->
+                <Collapsible Margin="2 2 2 2">
+                    <CollapsibleHeading Title="Incoming Temperature Lockout" />
+                    <CollapsibleBody Margin="20 0 0 0">
+                        <!-- Assmos changes start -->
+                        <BoxContainer Orientation="Vertical" Name="TemperatureThresholdContainer">
+
+                        </BoxContainer>
+                        <!-- Assmos changes end -->
+                    </CollapsibleBody>
+                </Collapsible>
             </BoxContainer>
         </CollapsibleBody>
     </Collapsible>

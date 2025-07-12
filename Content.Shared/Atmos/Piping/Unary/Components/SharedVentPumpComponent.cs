@@ -12,6 +12,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Atmos.Monitor;
 using Content.Shared.Atmos.Monitor.Components;
 using Robust.Shared.Serialization;
 
@@ -40,6 +41,13 @@ namespace Content.Shared.Atmos.Piping.Unary.Components
         };
 
         public HashSet<Gas> GasLockoutGases = new(DefaultLockoutGases); //Ratbite - Gase Lockout
+
+        public AtmosAlarmThreshold TemperatureLockoutThreshold = new();
+
+        /// <summary>
+        ///     Current temperature detected by this sensor.
+        /// </summary>
+        public float Temperature { get; set; }
 
         // Presets for 'dumb' air alarm modes
 
