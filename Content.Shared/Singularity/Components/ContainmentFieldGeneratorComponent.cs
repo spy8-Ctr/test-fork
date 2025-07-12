@@ -96,6 +96,13 @@ public sealed partial class ContainmentFieldGeneratorComponent : Component
     public int PowerReceived = 3;
 
     /// <summary>
+    /// Punch the generator into functionality! Ratbite code
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField("punchPower")]
+    public int PunchPowerReceived = 2;
+
+    /// <summary>
     /// How much power should this field generator lose if not powered?
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]

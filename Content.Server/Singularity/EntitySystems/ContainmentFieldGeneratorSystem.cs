@@ -113,6 +113,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Singularity.Components;
 using Content.Shared.Tag;
+using Content.Shared.Weapons.Melee.Events; //Ratbite
 using Robust.Server.GameObjects;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
@@ -143,6 +144,7 @@ public sealed class ContainmentFieldGeneratorSystem : EntitySystem
         SubscribeLocalEvent<ContainmentFieldGeneratorComponent, ComponentRemove>(OnComponentRemoved);
         SubscribeLocalEvent<ContainmentFieldGeneratorComponent, EventHorizonAttemptConsumeEntityEvent>(PreventBreach);
         SubscribeLocalEvent<ContainmentFieldGeneratorComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<ContainmentFieldGeneratorComponent, AttackedEvent>(OnMeleeHit); //Ratbite - Generate on melee hit
     }
 
     public override void Update(float frameTime)
@@ -184,6 +186,12 @@ public sealed class ContainmentFieldGeneratorSystem : EntitySystem
             ReceivePower(generator.Comp.PowerReceived, generator);
             generator.Comp.Accumulator = 0f;
         }
+    }
+
+    private void OnMeleeHit(Entity<ContainmentFieldGeneratorComponent> generator, ref AttackedEvent args) //Ratbite, generate charge on melee hit
+    {
+        ReceivePower(generator.Comp.PunchPowerReceived, generator);
+        generator.Comp.Accumulator = 0f;
     }
 
     private void OnExamine(EntityUid uid, ContainmentFieldGeneratorComponent component, ExaminedEvent args)
