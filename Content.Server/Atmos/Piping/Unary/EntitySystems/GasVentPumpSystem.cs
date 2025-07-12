@@ -409,6 +409,13 @@ namespace Content.Server.Atmos.Piping.Unary.EntitySystems
                         if (!previous.GasLockoutGases.Contains(gas))
                             _adminLogger.Add(LogType.AtmosDeviceSetting, LogImpact.Medium, $"{ToPrettyString(uid)} {gas} lockout enabled");
 
+                    if (setData.TemperatureLockoutThresholdId != null)
+                    {
+                        var result = _prototypeManager.Index<AtmosAlarmThresholdPrototype>(setData.TemperatureLockoutThresholdId);
+                        setData.TemperatureLockoutThreshold = new(result);
+                        setData.TemperatureLockoutThresholdId = null;
+                    }
+
                     component.FromAirAlarmData(setData);
                     UpdateState(uid, component);
 

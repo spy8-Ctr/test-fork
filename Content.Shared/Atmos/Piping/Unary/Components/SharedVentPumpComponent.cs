@@ -14,6 +14,7 @@
 
 using Content.Shared.Atmos.Monitor;
 using Content.Shared.Atmos.Monitor.Components;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Atmos.Piping.Unary.Components
@@ -42,7 +43,10 @@ namespace Content.Shared.Atmos.Piping.Unary.Components
 
         public HashSet<Gas> GasLockoutGases = new(DefaultLockoutGases); //Ratbite - Gase Lockout
 
+        public ProtoId<AtmosAlarmThresholdPrototype>? TemperatureLockoutThresholdId = "stationTemperature";
         public AtmosAlarmThreshold TemperatureLockoutThreshold = new();
+
+        public static ProtoId<AtmosAlarmThresholdPrototype> StandardThresholdId = "stationTemperature";
 
         /// <summary>
         ///     Current temperature detected by this sensor.
@@ -59,7 +63,8 @@ namespace Content.Shared.Atmos.Piping.Unary.Components
             ExternalPressureBound = Atmospherics.OneAtmosphere,
             InternalPressureBound = 0f,
             PressureLockoutOverride = false,
-            GasLockoutGases = DefaultLockoutGases //Ratbite - Gas Lockout
+            GasLockoutGases = DefaultLockoutGases, //Ratbite - Gas Lockout
+            TemperatureLockoutThresholdId = StandardThresholdId,
         };
 
         public static GasVentPumpData FillModePreset = new GasVentPumpData
@@ -71,7 +76,8 @@ namespace Content.Shared.Atmos.Piping.Unary.Components
             ExternalPressureBound = Atmospherics.OneAtmosphere * 50,
             InternalPressureBound = 0f,
             PressureLockoutOverride = true,
-            GasLockoutGases = DefaultLockoutGases //Ratbite - Gas Lockout
+            GasLockoutGases = DefaultLockoutGases, //Ratbite - Gas Lockout,
+            TemperatureLockoutThresholdId = StandardThresholdId,
         };
 
         public static GasVentPumpData PanicModePreset = new GasVentPumpData
@@ -83,7 +89,8 @@ namespace Content.Shared.Atmos.Piping.Unary.Components
             ExternalPressureBound = Atmospherics.OneAtmosphere,
             InternalPressureBound = 0f,
             PressureLockoutOverride = false,
-            GasLockoutGases = DefaultLockoutGases //Ratbite - Gas Lockout
+            GasLockoutGases = DefaultLockoutGases, //Ratbite - Gas Lockout
+            TemperatureLockoutThresholdId = StandardThresholdId,
         };
 
         public static GasVentPumpData ReplaceModePreset = new GasVentPumpData
@@ -96,7 +103,8 @@ namespace Content.Shared.Atmos.Piping.Unary.Components
             ExternalPressureBound = Atmospherics.OneAtmosphere,
             InternalPressureBound = 0f,
             PressureLockoutOverride = false,
-            GasLockoutGases = DefaultLockoutGases //Ratbite - Gas Lockout
+            GasLockoutGases = DefaultLockoutGases, //Ratbite - Gas Lockout
+            TemperatureLockoutThresholdId = StandardThresholdId,
         };
     }
 
