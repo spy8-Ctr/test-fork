@@ -47,7 +47,7 @@ SPDX-License-Identifier: MIT
                 </BoxContainer>
                 <!-- Lowerer row: every single gas -->
                 <Collapsible Margin="2 2 2 2">
-                    <CollapsibleHeading Title="Gas Lockout" />
+                    <CollapsibleHeading Title="Incoming Gas Lockout" />
                     <CollapsibleBody Margin="20 0 0 0">
                         <!-- Assmos changes start -->
                         <BoxContainer Orientation="Vertical">
