@@ -70,7 +70,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Atmos.Monitor.Components;
 using Content.Server.DeviceNetwork.Systems;
-using Content.Server.Radio.EntitySystems;
 using Content.Shared.Atmos.Monitor;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Events;
@@ -92,9 +91,7 @@ public sealed class AtmosAlarmableSystem : EntitySystem
     [Dependency] private readonly DeviceNetworkSystem _deviceNet = default!;
     [Dependency] private readonly AtmosDeviceNetworkSystem _atmosDevNetSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly RadioSystem _radioSystem = default!;
-    [Dependency] private readonly NavMapSystem _navMap = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private readonly EmagSystem _emag = default!;
 
     /// <summary>
     ///     An alarm. Has three valid states: Normal, Warning, Danger.
@@ -252,30 +249,10 @@ public sealed class AtmosAlarmableSystem : EntitySystem
             SyncAlertsToNetwork(uid, null, alarmable);
         }
 
-        if (type == AtmosAlarmType.Danger)
-        {
-            SendRadioAlert(uid, alarmable);
-        }
-
         alarmable.LastAlarmState = type;
         UpdateAppearance(uid, type);
         PlayAlertSound(uid, type, alarmable);
         RaiseLocalEvent(uid, new AtmosAlarmEvent(type), true);
-    }
-
-    public void SendRadioAlert(EntityUid uid, AtmosAlarmableComponent alarmable)
-    {
-        if (_gameTiming.CurTime < alarmable.AllowAlarmTime)
-            return;
-
-        alarmable.AllowAlarmTime = _gameTiming.CurTime + alarmable.AlarmDelay;
-        foreach (var channel in alarmable.AlertBroadcastChannels)
-        {
-            var posText = FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString(uid));
-            var distressMessage = Loc.GetString(alarmable.DangerAlertMessage, ("position", posText));
-
-            _radioSystem.SendRadioMessage(uid, distressMessage, _prototypeManager.Index<RadioChannelPrototype>(channel), uid);
-        }
     }
 
     public void SyncAlertsToNetwork(EntityUid uid, string? address = null, AtmosAlarmableComponent? alarmable = null, TagComponent? tags = null)

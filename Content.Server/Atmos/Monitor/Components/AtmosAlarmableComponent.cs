@@ -72,12 +72,6 @@ public sealed partial class AtmosAlarmableComponent : Component
     [DataField("receiveOnly")]
     public bool ReceiveOnly { get; private set; }
 
-    [DataField]
-    public LocId DangerAlertMessage = "atmos-radio-alarm-danger";
-
-    [DataField("channels", customTypeSerializer: typeof(PrototypeIdHashSetSerializer<RadioChannelPrototype>))]
-    public HashSet<string> AlertBroadcastChannels = new () { "Security", "Engineering" };
-
     public TimeSpan AllowAlarmTime = TimeSpan.Zero;
     public TimeSpan AlarmDelay = TimeSpan.FromSeconds(20);
 }
