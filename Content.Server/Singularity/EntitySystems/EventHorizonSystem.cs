@@ -164,6 +164,7 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
         SubscribeLocalEvent<EventHorizonComponent, EventHorizonAttemptConsumeEntityEvent>(OnAnotherEventHorizonAttemptConsumeThisEventHorizon);
         SubscribeLocalEvent<EventHorizonComponent, EventHorizonConsumedEntityEvent>(OnAnotherEventHorizonConsumedThisEventHorizon);
         SubscribeLocalEvent<ContainerManagerComponent, EventHorizonConsumedEntityEvent>(OnContainerConsumed);
+        SubscribeLocalEvent<GeneratorChargeChangedEvent>(OnGenLooseCharge);
 
         var vvHandle = Vvm.GetTypeHandler<EventHorizonComponent>();
         vvHandle.AddPath(nameof(EventHorizonComponent.TargetConsumePeriod), (_, comp) => comp.TargetConsumePeriod, SetConsumePeriod);
@@ -265,16 +266,6 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
                     if (eventHorizon.ContainingFieldGenerators.Add(gen))
                         Log.Info("New gen added to list");
                 }
-                var lowest = GetLowestPower(eventHorizon.ContainingFieldGenerators);
-                if (lowest != null)
-                {
-                    var validLowest = lowest.Value;
-                    if (validLowest.Comp.PowerBuffer != eventHorizon.LowestPowerGenBuffer)
-                    {
-                        Log.Info("Lowest buffer: "+validLowest.Comp.PowerBuffer);
-                        UpdateBuffer(eventHorizon, validLowest);
-                    }
-                }
             }
             return false;
         }
@@ -283,10 +274,31 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
         return true;
     }
 
+    private void OnGenLooseCharge(ref GeneratorChargeChangedEvent ev)
+    {
+        var horizons = AllEntityQuery<EventHorizonComponent>();
+        while (horizons.MoveNext(out var ent, out var eventHorizon))
+        {
+            var lowest = GetLowestPower(eventHorizon.ContainingFieldGenerators);
+            if (lowest == null)
+            {
+                continue;
+            }
+            var validLowest = lowest.Value;
+            if (validLowest.Comp.PowerBuffer != eventHorizon.LowestPowerGenBuffer)
+            {
+                Log.Info("Lowest buffer: "+validLowest.Comp.PowerBuffer);
+                UpdateBuffer(eventHorizon, validLowest);
+            }
+        }
+    }
+
     private void UpdateBuffer(EventHorizonComponent eventHorizon, Entity<ContainmentFieldGeneratorComponent> gen)
     {
         var newpercent = (gen.Comp.PowerBuffer - gen.Comp.PowerMinimum) / 21f;
         var oldpercent = (eventHorizon.LowestPowerGenBuffer - gen.Comp.PowerMinimum) / 21f;
+
+        var displayPercent = MathF.Round(newpercent * 100f);
 
         Log.Info("Updating buffer: "+newpercent+" "+oldpercent);
 
@@ -296,35 +308,35 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
         {
             if (oldpercent > 0f)
             {
-                message = Loc.GetString("containment-field-buffer-drop-loose", ("buffer", newpercent*100f));
+                message = Loc.GetString("containment-field-buffer-drop-loose", ("buffer", displayPercent));
             }
         }
         if (newpercent <= 0.10f)
         {
             if (oldpercent > 0.10f)
             {
-                message = Loc.GetString("containment-field-buffer-drop-danger", ("buffer", newpercent*100f));
+                message = Loc.GetString("containment-field-buffer-drop-emergency", ("buffer", displayPercent));
             }
         }
         else if (newpercent <= 0.25f)
         {
             if (oldpercent > 0.25f)
             {
-                message = Loc.GetString("containment-field-buffer-drop-danger", ("buffer", newpercent*100f));
+                message = Loc.GetString("containment-field-buffer-drop-emergency", ("buffer", displayPercent));
             }
         }
         else if (newpercent <= 0.50f)
         {
             if (oldpercent > 0.50f)
             {
-                message = Loc.GetString("containment-field-buffer-drop-warning", ("buffer", newpercent*100f));
+                message = Loc.GetString("containment-field-buffer-drop-warning", ("buffer", displayPercent));
             }
         }
         else if (newpercent <= 0.75f)
         {
             if (oldpercent > 0.75f)
             {
-                message = Loc.GetString("containment-field-buffer-drop-warning", ("buffer", newpercent*100f));
+                message = Loc.GetString("containment-field-buffer-drop-warning", ("buffer", displayPercent));
             }
         }
 
@@ -337,7 +349,7 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
 
     private void MakeAnnouncement(EntityUid uid, string message, string? customSender = null)
     {
-        Log.Info("Announcement is : "+message);
+        Log.Info("Announcement sent by "+uid+" is : "+message+"");
 
         var sender = customSender != null ? customSender : Loc.GetString("containment-field-announcement");
         _chat.DispatchStationAnnouncement(uid, message, sender, colorOverride: Color.Yellow);
