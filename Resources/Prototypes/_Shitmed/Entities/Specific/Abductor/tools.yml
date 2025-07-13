@@ -32,6 +32,10 @@
   - type: GuideHelp
     guides:
     - Abductors
+  - type: Tag
+    tags:
+    - Crowbar
+    - AbductorWeapon
 
 - type: entity
   name: high-tech wirecutter
@@ -49,6 +53,7 @@
     tags:
     - PlantSampleTaker
     - Wirecutter
+    - AbductorWeapon
   - type: MeleeWeapon
     wideAnimationRotation: -90
     damage:
@@ -103,6 +108,7 @@
   - type: Tag
     tags:
     - Screwdriver
+    - AbductorWeapon
   - type: Item
     sprite: _Shitmed/Objects/Specific/Abductor/screwdriver.rsi
     storedRotation: -90
@@ -162,6 +168,10 @@
   - type: GuideHelp
     guides:
     - Abductors
+  - type: Tag
+    tags:
+    - AbductorWeapon
+    - Wrench
 
 - type: entity
   name: high-tech welding tool
@@ -201,6 +211,10 @@
   - type: GuideHelp
     guides:
     - Abductors
+  - type: Tag
+    tags:
+    - AbductorWeapon
+    - WeldingTool
 
 - type: entity
   name: high-tech multitool
@@ -246,6 +260,7 @@
       - Multitool
       - DoorElectronicsConfigurator
       - ShowWires
+      - AbductorWeapon
   - type: Tool
     qualities:
       - Pulsing

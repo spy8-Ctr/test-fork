@@ -22,6 +22,8 @@
     children:
     - id: BoxFolderCentCom
     - id: WeaponDisablerAdvanced
+    - id: WeaponDisabler
+    - id: PepperSpray #Ratbites, AAA GET AWAY
     - id: BriefcaseBrownFilled
     - id: BedsheetCentcom
     - id: CaneSheathFilledNanotrasen

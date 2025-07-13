@@ -20,5 +20,5 @@ public sealed partial class DragonKungFuTimerComponent : Component
     public TimeSpan PauseDuration = TimeSpan.FromSeconds(1f);
 
     [DataField]
-    public TimeSpan BuffLength = TimeSpan.FromSeconds(5f);
+    public TimeSpan BuffLength = TimeSpan.FromSeconds(1f);
 }

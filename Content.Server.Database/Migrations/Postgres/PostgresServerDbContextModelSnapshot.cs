@@ -739,6 +739,10 @@ namespace Content.Server.Database.Migrations.Postgres
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("BrigSentence")
+                        .HasColumnType("integer")
+                        .HasColumnName("brig_sentence");
+
                     b.Property<DateTime>("FirstSeenTime")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("first_seen_time");
@@ -764,6 +768,10 @@ namespace Content.Server.Database.Migrations.Postgres
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("last_seen_user_name");
+
+                    b.Property<int>("PPpoints")
+                        .HasColumnType("integer")
+                        .HasColumnName("pppoints");
 
                     b.Property<int>("ServerCurrency")
                         .HasColumnType("integer")

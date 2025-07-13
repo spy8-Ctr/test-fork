@@ -7,10 +7,11 @@
   showInVote: false
   #cooldown: 1
   rules:
+    - PermaBrig # RatBite - Multi-Round brig system
     - CosmicCult
     - SubGamemodesRule
     #- MeteorSwarmScheduler - Goob Edit
-    - SpaceTrafficControlEventScheduler
+    #- SpaceTrafficControlEventScheduler - Ratbite currently has no shuttle events
     - BasicRoundstartVariation
     - BasicStationEventScheduler
 
@@ -22,9 +23,10 @@
   description: secret-description
   showInVote: false
   rules:
+    - PermaBrig # RatBite - Multi-Round brig system
     - CosmicCult
     - SubGamemodesRule
     #- MeteorSwarmScheduler - Goob Edit
-    - SpaceTrafficControlEventScheduler
+    #- SpaceTrafficControlEventScheduler - Ratbite currently has no shuttle events
     - BasicRoundstartVariation
     - BasicStationEventScheduler

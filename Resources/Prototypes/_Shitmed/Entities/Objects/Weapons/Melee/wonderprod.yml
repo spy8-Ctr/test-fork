@@ -43,6 +43,9 @@
         Shock: 0
     angle: 60
     animation: WeaponArcThrust
+  - type: Tag
+    tags:
+    - AbductorWeapon
   - type: StaminaDamageOnHit
     damage: 50
     sound: /Audio/Weapons/Guns/Hits/taser_hit.ogg
