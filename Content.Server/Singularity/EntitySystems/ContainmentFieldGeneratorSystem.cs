@@ -104,6 +104,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Administration.Logs;
+using Content.Server.Chat.Systems;
 using Content.Server.Popups;
 using Content.Server.Singularity.Events;
 using Content.Shared.Construction.Components;
@@ -130,6 +131,7 @@ public sealed class ContainmentFieldGeneratorSystem : EntitySystem
     [Dependency] private readonly SharedPointLightSystem _light = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly TagSystem _tags = default!;
+    [Dependency] private readonly ChatSystem _chat = default!;
 
     public override void Initialize()
     {
@@ -336,6 +338,8 @@ public sealed class ContainmentFieldGeneratorSystem : EntitySystem
             RemoveConnections(generator);
         }
 
+
+
         ChangePowerVisualizer(power, generator);
     }
 
@@ -441,6 +445,13 @@ public sealed class ContainmentFieldGeneratorSystem : EntitySystem
                 var rotatedAngle = Angle.FromDegrees(rotateBy90);
 
                 fieldXForm.LocalRotation = rotatedAngle;
+            }
+
+            if (TryComp<ContainmentFieldComponent>(newField, out var comp))
+            {
+                comp.BoundGenerators = new List<Entity<ContainmentFieldGeneratorComponent>>();
+                comp.BoundGenerators.Add(firstGen);
+                comp.BoundGenerators.Add(secondGen);
             }
 
             fieldList.Add(newField);

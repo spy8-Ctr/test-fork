@@ -86,7 +86,7 @@ public sealed partial class ContainmentFieldGeneratorComponent : Component
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField("powerMinimum")]
-    public int PowerMinimum = 6;
+    public int PowerMinimum = 3;
 
     /// <summary>
     /// How much power should this field generator receive from a collision

@@ -106,6 +106,7 @@
 
 using System.Numerics;
 using Content.Server.Administration.Logs;
+using Content.Server.Chat.Systems;
 using Content.Server.Singularity.Events;
 using Content.Server.Station.Components;
 using Content.Shared.Database;
@@ -141,6 +142,7 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
     [Dependency] private readonly SharedTransformSystem _xformSystem = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly TagSystem _tagSystem = default!;
+    [Dependency] private readonly ChatSystem _chat = default!;
     #endregion Dependencies
 
     private static readonly ProtoId<TagPrototype> HighRiskItemTag = "HighRiskItem";
@@ -255,10 +257,106 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
     public bool AttemptConsumeEntity(EntityUid hungry, EntityUid morsel, EventHorizonComponent eventHorizon, BaseContainer? outerContainer = null)
     {
         if (!CanConsumeEntity(hungry, morsel, eventHorizon))
+        {
+            if (TryComp<ContainmentFieldComponent>(morsel, out var field))
+            {
+                foreach (var gen in field.BoundGenerators)
+                {
+                    if (eventHorizon.ContainingFieldGenerators.Add(gen))
+                        Log.Info("New gen added to list");
+                }
+                var lowest = GetLowestPower(eventHorizon.ContainingFieldGenerators);
+                if (lowest != null)
+                {
+                    var validLowest = lowest.Value;
+                    if (validLowest.Comp.PowerBuffer != eventHorizon.LowestPowerGenBuffer)
+                    {
+                        Log.Info("Lowest buffer: "+validLowest.Comp.PowerBuffer);
+                        UpdateBuffer(eventHorizon, validLowest);
+                    }
+                }
+            }
             return false;
+        }
 
         ConsumeEntity(hungry, morsel, eventHorizon, outerContainer);
         return true;
+    }
+
+    private void UpdateBuffer(EventHorizonComponent eventHorizon, Entity<ContainmentFieldGeneratorComponent> gen)
+    {
+        var newpercent = (gen.Comp.PowerBuffer - gen.Comp.PowerMinimum) / 21f;
+        var oldpercent = (eventHorizon.LowestPowerGenBuffer - gen.Comp.PowerMinimum) / 21f;
+
+        Log.Info("Updating buffer: "+newpercent+" "+oldpercent);
+
+        string? message = null;
+
+        if (newpercent <= 0f)
+        {
+            if (oldpercent > 0f)
+            {
+                message = Loc.GetString("containment-field-buffer-drop-loose", ("buffer", newpercent*100f));
+            }
+        }
+        if (newpercent <= 0.10f)
+        {
+            if (oldpercent > 0.10f)
+            {
+                message = Loc.GetString("containment-field-buffer-drop-danger", ("buffer", newpercent*100f));
+            }
+        }
+        else if (newpercent <= 0.25f)
+        {
+            if (oldpercent > 0.25f)
+            {
+                message = Loc.GetString("containment-field-buffer-drop-danger", ("buffer", newpercent*100f));
+            }
+        }
+        else if (newpercent <= 0.50f)
+        {
+            if (oldpercent > 0.50f)
+            {
+                message = Loc.GetString("containment-field-buffer-drop-warning", ("buffer", newpercent*100f));
+            }
+        }
+        else if (newpercent <= 0.75f)
+        {
+            if (oldpercent > 0.75f)
+            {
+                message = Loc.GetString("containment-field-buffer-drop-warning", ("buffer", newpercent*100f));
+            }
+        }
+
+        Log.Info(""+message);
+        if(message != null)
+            MakeAnnouncement(gen, message);
+
+        eventHorizon.LowestPowerGenBuffer = gen.Comp.PowerBuffer;
+    }
+
+    private void MakeAnnouncement(EntityUid uid, string message, string? customSender = null)
+    {
+        Log.Info("Announcement is : "+message);
+
+        var sender = customSender != null ? customSender : Loc.GetString("containment-field-announcement");
+        _chat.DispatchStationAnnouncement(uid, message, sender, colorOverride: Color.Yellow);
+    }
+
+    private Entity<ContainmentFieldGeneratorComponent>? GetLowestPower(HashSet<Entity<ContainmentFieldGeneratorComponent>> gens)
+    {
+        var low = 25;
+        Entity<ContainmentFieldGeneratorComponent>? lowgen = null;
+        foreach (var gen in gens)
+        {
+            if (gen.Comp.PowerBuffer < low)
+            {
+                low = gen.Comp.PowerBuffer;
+                lowgen = gen;
+            }
+        }
+
+        return lowgen;
     }
 
     /// <summary>
