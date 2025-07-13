@@ -12,7 +12,7 @@
 
 ui-rules-header = Ratbite Station Official Server Rules
 ui-rules-header-rp = Ratbite Station Roleplay Official Server Rules
-ui-rules-accept = I have read and agree to follow the rules.
+ui-rules-accept = I have read and agree to follow the rules. (I also emancipate my soul from Kira)
 ui-rules-wait = The accept button will be enabled after {$time} seconds.
 
 ui-rules-button-home = Home
