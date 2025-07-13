@@ -340,7 +340,6 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
             }
         }
 
-        Log.Info(""+message);
         if(message != null)
             MakeAnnouncement(gen, message);
 
@@ -349,8 +348,6 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
 
     private void MakeAnnouncement(EntityUid uid, string message, string? customSender = null)
     {
-        Log.Info("Announcement sent by "+uid+" is : "+message+"");
-
         var sender = customSender != null ? customSender : Loc.GetString("containment-field-announcement");
         _chat.DispatchStationAnnouncement(uid, message, sender, colorOverride: Color.Yellow);
     }
