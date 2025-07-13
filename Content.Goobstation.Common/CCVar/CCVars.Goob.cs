@@ -3,7 +3,6 @@
 // SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
 // SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
 // SPDX-FileCopyrightText: 2025 DrSmugleaf <10968691+DrSmugleaf@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 DrSmugleaf <drsmugleaf@gmail.com>
 // SPDX-FileCopyrightText: 2025 Ducks <97200673+TwoDucksOnnaPlane@users.noreply.github.com>
@@ -11,6 +10,7 @@
 // SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
 // SPDX-FileCopyrightText: 2025 Ichaie <167008606+Ichaie@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
 // SPDX-FileCopyrightText: 2025 JORJ949 <159719201+JORJ949@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
 // SPDX-FileCopyrightText: 2025 MortalBaguette <169563638+MortalBaguette@users.noreply.github.com>
@@ -370,7 +370,7 @@ public sealed partial class GoobCVars
     /// Shove range multiplier.
     /// </summary>
     public static readonly CVarDef<float> ShoveRange =
-        CVarDef.Create("game.shove_range", 0.6f, CVar.SERVER | CVar.ARCHIVE);
+        CVarDef.Create("game.shove_range", 3f, CVar.SERVER | CVar.ARCHIVE);
 
     /// <summary>
     /// Shove speed multiplier, does not affect range.
@@ -534,8 +534,6 @@ public sealed partial class GoobCVars
         CVarDef.Create("hub.use_dynamic_hostname", false, CVar.SERVERONLY);
 
     #endregion
-<<<<<<< HEAD
-=======
 
     #region Shuttle CVars
 
@@ -616,5 +614,4 @@ public sealed partial class GoobCVars
     #endregion
 
     #endregion
->>>>>>> 344bb99c3f1c9a93e4d5c640776fc8b84985fc30
 }
