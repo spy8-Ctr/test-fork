@@ -436,7 +436,7 @@
   name: selectable-set-ert-laser-name
   description: selectable-set-ert-laser-description
   sprite:
-    sprite: Objects/Weapons/Guns/Battery/pulse_carbine.rsi
+    sprite: _Goobstation/Objects/Weapons/Guns/Battery/energy_rifle.rsi
     state: icon
   content:
     - WeaponEnergyRifle
@@ -453,8 +453,8 @@
   name: selectable-set-ert-cqc-name
   description: selectable-set-ert-cqc-description
   sprite:
-    sprite: _Goobstation/Objects/Weapons/Guns/Rifles/annie.rsi
-    state: base
+    sprite: _Goobstation/Objects/Misc/cqc_manual.rsi
+    state: icon
   content:
     - CQCManual
     - AutosurgeonRightSpeedLeg
@@ -467,8 +467,8 @@
   name: selectable-set-ert-breacher-name
   description: selectable-set-ert-breacher-description
   sprite:
-    sprite: Objects/Weapons/Guns/Battery/pulse_carbine.rsi
-    state: icon
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/shotgun_shell.rsi
+    state: base
   content:
     - WeaponShotgunCombatNT
     - MagazineBoxShotgunHighCaliber
@@ -482,7 +482,7 @@
   name: selectable-set-ert-sniper-name
   description: selectable-set-ert-sniper-description
   sprite:
-    sprite: Objects/Weapons/Guns/Battery/pulse_carbine.rsi
+    sprite: _Goobstation/Objects/Weapons/Guns/Battery/cell_sniper.rsi
     state: icon
   content:
     - WeaponLaserCellSniper
@@ -498,7 +498,7 @@
   name: selectable-set-ert-melee-name
   description: selectable-set-ert-melee-description
   sprite:
-    sprite: Objects/Weapons/Guns/Battery/pulse_carbine.rsi
+    sprite: Objects/Weapons/Melee/e_sword.rsi
     state: icon
   content:
     - EnergySword
