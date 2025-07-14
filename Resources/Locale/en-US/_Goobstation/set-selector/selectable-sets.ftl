@@ -193,6 +193,12 @@ selectable-set-ert-sniper-description =
     Includes: An energy sniper.
     EG-4 revolver, pulse cells.
 
+selectable-set-ert-melee-name = melee set
+selectable-set-ert-melee-description =
+    Do not point the sword downwards, do not try to use the shield like extremely old earthen super hero comics. -Central Command
+    Includes: An energy sword and a shield to go with it.
+    Comes with a stim also if you happen to get harmed or your shield breaks.
+
 # Voidsuit selectors
 
 selectable-set-paramedic-voidsuit-name = Paramedic voidsuit
