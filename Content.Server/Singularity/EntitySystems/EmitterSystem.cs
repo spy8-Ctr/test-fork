@@ -64,6 +64,7 @@ using Content.Server.Projectiles;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared.Database;
 using Content.Shared.DeviceLinking.Events;
+using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Lock;
@@ -72,6 +73,7 @@ using Content.Shared.Power;
 using Content.Shared.Projectiles;
 using Content.Shared.Singularity.Components;
 using Content.Shared.Singularity.EntitySystems;
+using Content.Shared.Singularity.Events;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using JetBrains.Annotations;
@@ -95,6 +97,7 @@ namespace Content.Server.Singularity.EntitySystems
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly ProjectileSystem _projectile = default!;
         [Dependency] private readonly GunSystem _gun = default!;
+        [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
 
         public override void Initialize()
         {
@@ -107,6 +110,7 @@ namespace Content.Server.Singularity.EntitySystems
             SubscribeLocalEvent<EmitterComponent, ExaminedEvent>(OnExamined);
             SubscribeLocalEvent<EmitterComponent, AnchorStateChangedEvent>(OnAnchorStateChanged);
             SubscribeLocalEvent<EmitterComponent, SignalReceivedEvent>(OnSignalReceived);
+            SubscribeLocalEvent<EmitterComponent, PowerOffDoAfterEvent>(OnPowerOff);
         }
 
         private void OnAnchorStateChanged(EntityUid uid, EmitterComponent component, ref AnchorStateChangedEvent args)
@@ -142,6 +146,14 @@ namespace Content.Server.Singularity.EntitySystems
                     SwitchOff(uid, component);
                     _popup.PopupEntity(Loc.GetString("comp-emitter-turned-off",
                         ("target", uid)), uid, args.User);
+                    var doargs = new DoAfterArgs(EntityManager, args.User, component.PowerOffDelay, new PowerOffDoAfterEvent(), uid)
+                    {
+                        DistanceThreshold = 2f,
+                        BreakOnDamage = true,
+                        BreakOnMove = true,
+                    };
+                    args.Handled = true;
+                    _doAfter.TryStartDoAfter(doargs);
                 }
 
                 _adminLogger.Add(LogType.FieldGeneration,
@@ -154,6 +166,16 @@ namespace Content.Server.Singularity.EntitySystems
                 _popup.PopupEntity(Loc.GetString("comp-emitter-not-anchored",
                     ("target", uid)), uid, args.User);
             }
+        }
+
+        private void OnPowerOff(EntityUid uid, EmitterComponent component, PowerOffDoAfterEvent args)
+        {
+            if (args.Cancelled)
+                return;
+
+            SwitchOff(uid, component);
+            _popup.PopupEntity(Loc.GetString("comp-emitter-turned-off",
+                ("target", uid)), uid, args.User);
         }
 
         private void OnGetVerb(EntityUid uid, EmitterComponent component, GetVerbsEvent<Verb> args)

@@ -117,6 +117,9 @@ public sealed partial class EmitterComponent : Component
     /// </summary>
     [DataField("setTypePorts", customTypeSerializer: typeof(PrototypeIdDictionarySerializer<string, SinkPortPrototype>))]
     public Dictionary<string, string> SetTypePorts = new();
+
+    [DataField]
+    public TimeSpan PowerOffDelay = TimeSpan.FromSeconds(0);
 }
 
 [NetSerializable, Serializable]
