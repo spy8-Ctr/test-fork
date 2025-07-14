@@ -67,4 +67,5 @@
     - ERTCQCSet
     - ERTBreacherSet
     - ERTSniperSet
+    - ERTMeleeSet
     maxSelectedSets: 1
