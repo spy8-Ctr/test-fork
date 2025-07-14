@@ -67,6 +67,7 @@ using Content.Shared.Database;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Lock;
 using Content.Shared.Popups;
@@ -161,8 +162,15 @@ namespace Content.Server.Singularity.EntitySystems
                         component.NextWarning = _timing.CurTime + component.WarningCooldown;
                         foreach (var channel in component.WarningChannels)
                         {
+                            var title = "no ID found";
+                            var getIdentityEvent = new TryGetIdentityShortInfoEvent(uid, args.User);
+                            RaiseLocalEvent(getIdentityEvent);
+                            if(getIdentityEvent.Title != null)
+                                title = getIdentityEvent.Title;
+
                             _radio.SendRadioMessage(uid,
-                                Loc.GetString("containment-field-emitter-powering-off"),
+                                Loc.GetString("containment-field-emitter-powering-off",
+                                    ("id", title)),
                                 channel,
                                 uid,
                                 escapeMarkup: false);
