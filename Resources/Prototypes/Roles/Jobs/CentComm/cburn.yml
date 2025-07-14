@@ -44,12 +44,18 @@
     shoes: ClothingShoesBootsMagEmergencyResponseTeam # Goobstation
     id: CBURNPDA # Todo - Replace it.
     pocket1: InfectionScannerCburn # Goob
-    pocket2: WeaponPistolN1984
+    pocket2: WeaponAdvancedLaser
     belt: ClothingBeltSecurityFilled # No shotgun, no bandolier.
   storage:
     back:
-    - WeaponLaserCannon
-    - PortableRecharger
+    - WeaponShotgunAntelope
+    - BoxShotgunIncendiary
+    - BoxShotgunIncendiary
+    - MagazineShotgunIncendiary
+    - MagazineShotgunIncendiary
+    - MagazineShotgunIncendiary
+    - MagazineShotgunIncendiary
+    - SelfRechargingFireExtinguisher
     - GrenadeIncendiary
     - AmbuzolPlusMedipen # Injectors are cooler.
     - AmbuzolMedipen # Injectors are cooler.
