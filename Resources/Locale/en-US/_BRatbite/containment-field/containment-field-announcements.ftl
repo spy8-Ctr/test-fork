@@ -8,3 +8,6 @@ containment-field-buffer-drop-emergency =
 
 containment-field-buffer-drop-loose =
     SINGULO/TESLA LOOSE IMMINENT! Containment field failing.
+
+containment-field-emitter-powering-off =
+    Note: A containment field emitter is currently being powered off.

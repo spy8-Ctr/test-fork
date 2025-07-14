@@ -61,6 +61,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Projectiles;
+using Content.Server.Radio.EntitySystems;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared.Database;
 using Content.Shared.DeviceLinking.Events;
@@ -82,6 +83,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Timer = Robust.Shared.Timing.Timer;
 
@@ -98,6 +100,8 @@ namespace Content.Server.Singularity.EntitySystems
         [Dependency] private readonly ProjectileSystem _projectile = default!;
         [Dependency] private readonly GunSystem _gun = default!;
         [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+        [Dependency] private readonly RadioSystem _radio = default!;
+        [Dependency] private readonly IGameTiming _timing = default!;
 
         public override void Initialize()
         {
@@ -143,9 +147,6 @@ namespace Content.Server.Singularity.EntitySystems
                 }
                 else
                 {
-                    SwitchOff(uid, component);
-                    _popup.PopupEntity(Loc.GetString("comp-emitter-turned-off",
-                        ("target", uid)), uid, args.User);
                     var doargs = new DoAfterArgs(EntityManager, args.User, component.PowerOffDelay, new PowerOffDoAfterEvent(), uid)
                     {
                         DistanceThreshold = 2f,
@@ -154,6 +155,19 @@ namespace Content.Server.Singularity.EntitySystems
                     };
                     args.Handled = true;
                     _doAfter.TryStartDoAfter(doargs);
+
+                    if (component.NextWarning < _timing.CurTime)
+                    {
+                        component.NextWarning = _timing.CurTime + component.WarningCooldown;
+                        foreach (var channel in component.WarningChannels)
+                        {
+                            _radio.SendRadioMessage(uid,
+                                Loc.GetString("containment-field-emitter-powering-off"),
+                                channel,
+                                uid,
+                                escapeMarkup: false);
+                        }
+                    }
                 }
 
                 _adminLogger.Add(LogType.FieldGeneration,
