@@ -295,8 +295,8 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
 
     private void UpdateBuffer(EventHorizonComponent eventHorizon, Entity<ContainmentFieldGeneratorComponent> gen)
     {
-        var newpercent = (gen.Comp.PowerBuffer - gen.Comp.PowerMinimum) / 21f;
-        var oldpercent = (eventHorizon.LowestPowerGenBuffer - gen.Comp.PowerMinimum) / 21f;
+        var newpercent = (gen.Comp.PowerBuffer - gen.Comp.PowerMinimum) / (float)(gen.Comp.PowerMaximum - gen.Comp.PowerMinimum);
+        var oldpercent = (eventHorizon.LowestPowerGenBuffer - gen.Comp.PowerMinimum) / (float)(gen.Comp.PowerMaximum - gen.Comp.PowerMinimum);
 
         var displayPercent = MathF.Round(newpercent * 100f);
 
@@ -332,9 +332,9 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
                 message = Loc.GetString("containment-field-buffer-drop-warning", ("buffer", displayPercent));
             }
         }
-        else if (newpercent <= 0.75f)
+        else if (newpercent <= 0.80f)
         {
-            if (oldpercent > 0.75f)
+            if (oldpercent > 0.80f)
             {
                 message = Loc.GetString("containment-field-buffer-drop-warning", ("buffer", displayPercent));
             }
@@ -354,8 +354,9 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
 
     private Entity<ContainmentFieldGeneratorComponent>? GetLowestPower(HashSet<Entity<ContainmentFieldGeneratorComponent>> gens)
     {
-        var low = 25;
+        var low = 5000;
         Entity<ContainmentFieldGeneratorComponent>? lowgen = null;
+        gens.RemoveWhere(g => !g.Owner.Valid);
         foreach (var gen in gens)
         {
             if (gen.Comp.PowerBuffer < low)

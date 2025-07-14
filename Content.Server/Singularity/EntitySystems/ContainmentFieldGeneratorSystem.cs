@@ -500,14 +500,12 @@ public sealed class ContainmentFieldGeneratorSystem : EntitySystem
     private void ChangePowerVisualizer(int power, Entity<ContainmentFieldGeneratorComponent> generator)
     {
         var component = generator.Comp;
-        _visualizer.SetData(generator, ContainmentFieldGeneratorVisuals.PowerLight, component.PowerBuffer switch
-        {
-            <= 0 => PowerLevelVisuals.NoPower,
-            >= 25 => PowerLevelVisuals.HighPower,
-            _ => (component.PowerBuffer < component.PowerMinimum)
-                ? PowerLevelVisuals.LowPower
-                : PowerLevelVisuals.MediumPower
-        });
+        var visual = PowerLevelVisuals.NoPower;
+        if (component.PowerBuffer > component.PowerMinimum)
+            visual = PowerLevelVisuals.MediumPower;
+        if (component.PowerBuffer == component.PowerMaximum)
+            visual = PowerLevelVisuals.HighPower;
+        _visualizer.SetData(generator, ContainmentFieldGeneratorVisuals.PowerLight, visual);
     }
 
     /// <summary>
