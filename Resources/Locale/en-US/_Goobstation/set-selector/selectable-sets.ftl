@@ -171,31 +171,31 @@ selectable-set-ert-ballistic-description =
 
 selectable-set-ert-laser-name = laser set
 selectable-set-ert-laser-description =
-    Lead is ancient tech, blast golfball sized laser through them.
+    Lead is ancient tech, blast a golfball sized laser through them
     Includes: An Energy Rifle with 3 mags, one overcharged.
     EG-4 revolver, lethal cells and a disabler.
 
 selectable-set-ert-cqc-name = cqc set
 selectable-set-ert-cqc-description =
-    For only the truly robust, Domo arigato, Mr. Robusto.
+    For only the truly robust. "Domo arigato Mr. Robusto!"
     Includes: CQC book.
     Some bolas and some stims.
 
 selectable-set-ert-breacher-name = breacher set
 selectable-set-ert-breacher-description =
     "You cannot burn me! I'm already ablaze with passion, for war!"
-    Includes: A combat shotgun that can hold an extra shell and auto cycles.
+    Includes: A combat shotgun that can hold an extra shell and auto cycles
     Two shell boxes, Two charges, NT brand energy breaching device.
 
 selectable-set-ert-sniper-name = sniper set
 selectable-set-ert-sniper-description =
-    Headshot, Centcomm does not permit "360 noscopes" no matter how "Hip" it is.
+    Headshot! Centcomm does not permit "360 noscopes" no matter how "Hip"
     Includes: An energy sniper.
-    EG-4 revolver, pulse cells.
+    EG-4 revolver, lethal cells, disabler.
 
 selectable-set-ert-melee-name = melee set
 selectable-set-ert-melee-description =
-    Do not point the sword downwards, do not try to use the shield like extremely old earthen super hero comics. -Central Command
+    Cuts through people like a knife to hot butter.
     Includes: An energy sword and a shield to go with it.
     Comes with a stim also if you happen to get harmed or your shield breaks.
 
