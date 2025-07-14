@@ -49,8 +49,6 @@
   storage:
     back:
     - WeaponShotgunAntelope
-    - BoxShotgunIncendiary
-    - BoxShotgunIncendiary
     - MagazineShotgunIncendiary
     - MagazineShotgunIncendiary
     - MagazineShotgunIncendiary
