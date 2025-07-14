@@ -169,11 +169,28 @@ selectable-set-ert-ballistic-description =
     Includes: .30 caliber rifle, the Annie.
     Spare magazines for it, and an N1984.
 
-selectable-set-ert-pulse-name = pulse set
-selectable-set-ert-pulse-description =
-    Running out of ammo is the worst thing that could happen
-    in a firefight.
-    Includes: A modified pulse carbine.
+selectable-set-ert-laser-name = laser set
+selectable-set-ert-laser-description =
+    Lead is ancient tech, blast golfball sized laser through them.
+    Includes: An Energy Rifle with 3 mags, one overcharged.
+    EG-4 revolver, lethal cells and a disabler.
+
+selectable-set-ert-cqc-name = cqc set
+selectable-set-ert-cqc-description =
+    For only the truly robust, Domo arigato, Mr. Robusto.
+    Includes: CQC book.
+    Some bolas and some stims.
+
+selectable-set-ert-breacher-name = breacher set
+selectable-set-ert-breacher-description =
+    "You cannot burn me! I'm already ablaze with passion, for war!"
+    Includes: A combat shotgun that can hold an extra shell and auto cycles.
+    Two shell boxes, Two charges, NT brand energy breaching device.
+
+selectable-set-ert-sniper-name = sniper set
+selectable-set-ert-sniper-description =
+    Headshot, Centcomm does not permit "360 noscopes" no matter how "Hip" it is.
+    Includes: An energy sniper.
     EG-4 revolver, pulse cells.
 
 # Voidsuit selectors
