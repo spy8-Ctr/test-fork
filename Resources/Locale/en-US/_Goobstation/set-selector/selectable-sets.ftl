@@ -178,8 +178,8 @@ selectable-set-ert-laser-description =
 selectable-set-ert-cqc-name = cqc set
 selectable-set-ert-cqc-description =
     For only the truly robust. "Domo arigato Mr. Robusto!"
-    Includes: CQC book.
-    Some bolas and some stims.
+    Includes: CQC book, Combat medical pens, EBolas
+    One NT brand speed leg auto surgeon
 
 selectable-set-ert-breacher-name = breacher set
 selectable-set-ert-breacher-description =
