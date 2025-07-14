@@ -62,7 +62,9 @@
     state: icon
   - type: SetSelector
     possibleSets:
-    - ERTBallisticsSet
-    - ERTPulseSet
+    - ERTTacticalSet
+    - ERTLaserSet
+    - ERTCQCSet
+    - ERTBreacherSet
+    - ERTSniperSet
     maxSelectedSets: 1
-
