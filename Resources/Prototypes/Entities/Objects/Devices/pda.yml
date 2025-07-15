@@ -239,7 +239,7 @@
   - type: UnpoweredFlashlight
   - type: PointLight
     enabled: false
-    radius: 1.5
+    radius: 2.5 #Ratbites, PDA light buff
     softness: 5
     autoRot: true
   - type: Ringer
