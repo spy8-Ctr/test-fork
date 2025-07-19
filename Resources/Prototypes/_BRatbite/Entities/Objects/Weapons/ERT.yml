@@ -1,6 +1,6 @@
 - type: entity
   id: NTEnergyPickaxe
-  parent: [BaseMeleeWeaponEnergy, BaseSyndicateContraband]
+  parent: [BaseMeleeWeaponEnergy, BaseCentcommContraband]
   name: NT energy pickaxe
   description: A holographic mining tool with blades comprised of hard light, This one seems to has its blades altered to cause more structural damage but less effective on people in return.
   components:
@@ -68,7 +68,7 @@
 
 - type: entity
   name: "NT combat shotgun"
-  parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSyndicateContraband]
+  parent: [BaseWeaponShotgun, BaseGunWieldable, BaseCentcommContraband]
   id: WeaponShotgunCombatNT
   description: An old design with a beefier shell intended to repell boarding parties, this one seems to have been upgraded to auto cycle and can hold an extra shell.
   components:
