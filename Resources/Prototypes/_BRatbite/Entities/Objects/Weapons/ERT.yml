@@ -2,7 +2,7 @@
   id: NTEnergyPickaxe
   parent: [BaseMeleeWeaponEnergy, BaseCentcommContraband]
   name: NT energy pickaxe
-  description: A holographic mining tool with blades comprised of hard light, This one seems to has its blades altered to cause more structural damage but less effective on people in return.
+  description: A holographic mining tool with blades comprised of hard light, This one seems to has its blades altered to cause more structural damage but less effective on people in return. There is an engraving in the hilt "FOR AUTHORIZED PERSONNEL ONLY"
   components:
   - type: ItemToggleSize
     activatedSize: Huge
@@ -70,7 +70,7 @@
   name: "NT combat shotgun"
   parent: [BaseWeaponShotgun, BaseGunWieldable, BaseCentcommContraband]
   id: WeaponShotgunCombatNT
-  description: An old design with a beefier shell intended to repell boarding parties, this one seems to have been upgraded to auto cycle and can hold an extra shell.
+  description: An old design with a beefier shell intended to repell boarding parties, this one seems to have been upgraded to auto cycle and can hold an extra shell. There is an engraving in the barrel "FOR AUTHORIZED PERSONNEL ONLY"
   components:
   - type: Item
     size: Large
@@ -93,3 +93,22 @@
     soundRack:
       path: /Audio/Weapons/Guns/Cock/ltrifle_cock.ogg
     autoCycle: true
+
+- type: entity
+  parent: [BaseItem, BaseCentcommContraband]
+  id: CQCManualNT
+  name: CQC Manual
+  description: A small, black manual. There are drawn instructions of tactical hand-to-hand combat. There is a sticker that reads "FOR AUTHORIZED PERSONNEL ONLY"
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Misc/cqc_manual.rsi
+    layers:
+    - state: icon
+  - type: Item
+    size: Small
+  - type: StaticPrice
+    price: 3000
+  - type: GrantCqc
+  - type: GuideHelp
+    guides:
+    - CQC
