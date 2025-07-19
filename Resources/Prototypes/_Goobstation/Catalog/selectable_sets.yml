@@ -456,7 +456,7 @@
     sprite: _Goobstation/Objects/Misc/cqc_manual.rsi
     state: icon
   content:
-    - CQCManual
+    - CQCManualNT
     - AutosurgeonRightSpeedLeg
     - AdvancedCombatMedipen
     - BolaEnergy
