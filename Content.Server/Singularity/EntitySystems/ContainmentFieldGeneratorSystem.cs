@@ -338,8 +338,8 @@ public sealed class ContainmentFieldGeneratorSystem : EntitySystem
             RemoveConnections(generator);
         }
 
-        var chargeEvent = new GeneratorChargeChangedEvent(generator, generator);
-        RaiseLocalEvent(generator, ref chargeEvent, broadcast: true);
+        var chargeEvent = new GeneratorChargeChangedEvent(generator, generator); # Ratbite
+        RaiseLocalEvent(generator, ref chargeEvent, broadcast: true); # Ratbite
 
         ChangePowerVisualizer(power, generator);
     }
