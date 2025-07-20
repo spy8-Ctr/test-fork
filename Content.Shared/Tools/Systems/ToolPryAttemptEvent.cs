@@ -1,8 +1,8 @@
 namespace Content.Shared.Tools.Systems;
 
 /// <summary>
-///     Checks that entity can be weld/unweld.
-///     Raised twice: before do_after and after to check that entity still valid.
+///     Sent when someone is attempting to pry a tile beneath an entity.
+///     Every entity on the tile will be sent this event.
 /// </summary>
 public sealed class ToolPryAttemptEvent : CancellableEntityEventArgs
 {
