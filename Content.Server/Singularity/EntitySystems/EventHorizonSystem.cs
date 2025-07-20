@@ -299,39 +299,52 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
 
         string? message = null;
 
-        if (newpercent <= 0f)
+        switch (newpercent)
         {
-            if (oldpercent > 0f)
+            case <= 0f:
             {
-                message = Loc.GetString("containment-field-buffer-drop-loose", ("buffer", displayPercent));
+                if (oldpercent > 0f) //These checks make sure that we passed the threshold THIS buffer update
+                {
+                    message = Loc.GetString("containment-field-buffer-drop-loose", ("buffer", displayPercent));
+                }
+
+                break;
             }
-        }
-        if (newpercent <= 0.10f)
-        {
-            if (oldpercent > 0.10f)
+            case <= 0.10f:
             {
-                message = Loc.GetString("containment-field-buffer-drop-emergency", ("buffer", displayPercent));
+                if (oldpercent > 0.10f)
+                {
+                    message = Loc.GetString("containment-field-buffer-drop-emergency", ("buffer", displayPercent));
+                }
+
+                break;
             }
-        }
-        else if (newpercent <= 0.25f)
-        {
-            if (oldpercent > 0.25f)
+            case <= 0.25f:
             {
-                message = Loc.GetString("containment-field-buffer-drop-emergency", ("buffer", displayPercent));
+                if (oldpercent > 0.25f)
+                {
+                    message = Loc.GetString("containment-field-buffer-drop-emergency", ("buffer", displayPercent));
+                }
+
+                break;
             }
-        }
-        else if (newpercent <= 0.50f)
-        {
-            if (oldpercent > 0.50f)
+            case <= 0.50f:
             {
-                message = Loc.GetString("containment-field-buffer-drop-warning", ("buffer", displayPercent));
+                if (oldpercent > 0.50f)
+                {
+                    message = Loc.GetString("containment-field-buffer-drop-warning", ("buffer", displayPercent));
+                }
+
+                break;
             }
-        }
-        else if (newpercent <= 0.80f)
-        {
-            if (oldpercent > 0.80f)
+            case <= 0.80f:
             {
-                message = Loc.GetString("containment-field-buffer-drop-warning", ("buffer", displayPercent));
+                if (oldpercent > 0.80f)
+                {
+                    message = Loc.GetString("containment-field-buffer-drop-warning", ("buffer", displayPercent));
+                }
+
+                break;
             }
         }
 
