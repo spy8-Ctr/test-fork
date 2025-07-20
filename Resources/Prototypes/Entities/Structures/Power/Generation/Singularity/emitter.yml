@@ -73,8 +73,8 @@
       visible: false
       map: ["enum.LockVisualLayers.Lock"]
   - type: Emitter
-    powerOffDelay: 15
-    channels:
+    powerOffDelay: 15 #Ratbite - Power Safety
+    channels: #Ratbite - Power Safety
     - Security
     - Engineering
   - type: Gun
