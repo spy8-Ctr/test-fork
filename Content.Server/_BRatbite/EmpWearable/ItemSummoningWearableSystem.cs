@@ -19,10 +19,8 @@ public sealed class ItemSummoningWearableSystem : SharedItemSummoningWearableSys
 
     private void OnSummonEmp(Entity<ItemSummoningWearableComponent> ent, ref ItemSummonActionEvent args)
     {
-        Log.Info("Summon Event Ran");
         if (ent.Comp.SummonedEntity != EntityUid.Invalid)
         {
-            Log.Info("Already Existed");
             QueueDel(ent.Comp.SummonedEntity);
             ent.Comp.SummonedEntity = EntityUid.Invalid;
             _actionsSystem.SetToggled(args.Action, false);
@@ -31,7 +29,6 @@ public sealed class ItemSummoningWearableSystem : SharedItemSummoningWearableSys
 
         if (!_hands.TryGetEmptyHand(args.Performer, out var emptyHand))
             return;
-        Log.Info("Got Hand");
 
         var st = Spawn(ent.Comp.SummonEntity, Transform(ent).Coordinates);
 
@@ -40,7 +37,6 @@ public sealed class ItemSummoningWearableSystem : SharedItemSummoningWearableSys
             QueueDel(ent.Comp.SummonedEntity);
             return;
         }
-        Log.Info("Pickup");
 
         if (!TryComp<SummonedItemDespawnComponent>(st, out var stComp))
             return;
@@ -49,7 +45,5 @@ public sealed class ItemSummoningWearableSystem : SharedItemSummoningWearableSys
         stComp.Creator = ent;
 
         _actionsSystem.SetToggled(args.Action, true);
-
-        Log.Info("Summoned Emp");
     }
 }
