@@ -92,7 +92,7 @@ public sealed partial class ContainmentFieldGeneratorComponent : Component
     /// The maximum charge the field generator can store
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("powerMaximum")]
+    [DataField]
     public int PowerMaximum = 30; //Ratbite
 
     /// <summary>
@@ -106,7 +106,7 @@ public sealed partial class ContainmentFieldGeneratorComponent : Component
     /// Punch the generator into functionality!
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("punchPower")]
+    [DataField]
     public int PunchPowerReceived = 2; //Ratbite
 
     /// <summary>
