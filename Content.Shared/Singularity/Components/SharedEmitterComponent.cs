@@ -22,6 +22,7 @@ using Content.Shared.Radio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Dictionary;
@@ -123,7 +124,7 @@ public sealed partial class EmitterComponent : Component
     [DataField]
     public TimeSpan PowerOffDelay = TimeSpan.FromSeconds(0);
 
-    [DataField]
+    [DataField(customTypeSerializer:typeof(TimeOffsetSerializer))]
     public TimeSpan NextWarning = TimeSpan.Zero;
 
     [DataField]
