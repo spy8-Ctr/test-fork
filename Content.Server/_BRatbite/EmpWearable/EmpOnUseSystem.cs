@@ -1,9 +1,7 @@
-using Content.Server.Damage.Systems;
 using Content.Server.Emp;
 using Content.Shared._BRatbite.EmpGlove;
 using Content.Shared.Interaction;
 using Robust.Server.Containers;
-using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 
@@ -16,7 +14,6 @@ public sealed class EmpOnUseSystem : EntitySystem
 {
     [Dependency] private readonly EmpSystem _empSystem = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly StaminaSystem _stamina = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     /// <inheritdoc/>
     public override void Initialize()
