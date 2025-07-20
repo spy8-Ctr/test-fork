@@ -29,23 +29,22 @@ public sealed class EmpOnUseSystem : EntitySystem
 
     private void OnAfterInteract(Entity<EmpOnUseComponent> ent, ref AfterInteractEvent args)
     {
-        if (!args.CanReach)
+        if (!args.CanReach
+            || args.Target is not { } target
+            || args.Target == args.User)
             return;
 
-        if (args.Target == null || args.Target == args.User)
-            return;
-
-        if (TryComp<ContainerManagerComponent>(args.Target, out var containerManager))
+        if (TryComp<ContainerManagerComponent>(target, out var containerManager))
         {
-            var containers = _container.GetAllContainers(args.Target.Value, containerManager);
+            var containers = _container.GetAllContainers(target, containerManager);
             foreach (var container in containers)
                 foreach (var entity in container.ContainedEntities)
                     _empSystem.TryEmpEffects(entity, ent.Comp.EmpDrain, ent.Comp.EmpDuration);
         }
 
-        _empSystem.TryEmpEffects(args.Target.Value, ent.Comp.EmpDrain, ent.Comp.EmpDuration);
+        _empSystem.TryEmpEffects(target, ent.Comp.EmpDrain, ent.Comp.EmpDuration);
 
-        var coords = _transform.GetMapCoordinates(args.Target.Value);
+        var coords = _transform.GetMapCoordinates(target);
         Spawn(EmpSystem.EmpPulseEffectPrototype, coords);
         _audioSystem.PlayPvs(ent.Comp.EmpSound, ent);
 
