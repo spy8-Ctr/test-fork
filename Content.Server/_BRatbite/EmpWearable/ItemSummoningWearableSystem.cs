@@ -44,10 +44,10 @@ public sealed class ItemSummoningWearableSystem : EntitySystem
 
     private void OnSummonEmp(Entity<ItemSummoningWearableComponent> ent, ref ItemSummonActionEvent args)
     {
-        if (ent.Comp.SummonedEntity != EntityUid.Invalid)
+        if (ent.Comp.SummonedEntity.HasValue)
         {
             QueueDel(ent.Comp.SummonedEntity);
-            ent.Comp.SummonedEntity = EntityUid.Invalid;
+            ent.Comp.SummonedEntity = null;
             _actionsSystem.SetToggled(args.Action, false);
             return;
         }

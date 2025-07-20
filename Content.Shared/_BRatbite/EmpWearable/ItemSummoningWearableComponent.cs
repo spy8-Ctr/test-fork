@@ -15,7 +15,7 @@ public sealed partial class ItemSummoningWearableComponent : Component
     [DataField]
     public EntProtoId SummonEntity = "TouchEmp";
 
-    public EntityUid SummonedEntity = EntityUid.Invalid;
+    public EntityUid? SummonedEntity;
 
     [DataField]
     public EntProtoId Action = "ActionEmpSpawn";
