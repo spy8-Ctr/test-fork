@@ -17,7 +17,6 @@ public sealed class EmpOnUseSystem : EntitySystem
     [Dependency] private readonly EmpSystem _empSystem = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly StaminaSystem _stamina = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly SharedAudioSystem _audioSystem = default!;
     /// <inheritdoc/>
     public override void Initialize()
@@ -44,8 +43,7 @@ public sealed class EmpOnUseSystem : EntitySystem
 
         _empSystem.TryEmpEffects(target, ent.Comp.EmpDrain, ent.Comp.EmpDuration);
 
-        var coords = _transform.GetMapCoordinates(target);
-        Spawn(EmpSystem.EmpPulseEffectPrototype, coords);
+        Spawn(EmpSystem.EmpPulseEffectPrototype, Transform(target).Coordinates);
         _audioSystem.PlayPvs(ent.Comp.EmpSound, ent);
 
         args.Handled = true;
