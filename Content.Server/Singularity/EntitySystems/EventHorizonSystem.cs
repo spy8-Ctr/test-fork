@@ -264,7 +264,6 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
                 foreach (var gen in field.BoundGenerators)
                 {
                     if (eventHorizon.ContainingFieldGenerators.Add(gen))
-                        Log.Info("New gen added to list");
                 }
             }
             return false;
