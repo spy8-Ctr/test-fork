@@ -30,13 +30,7 @@ public sealed class EmpOnUseSystem : EntitySystem
             || args.Target == args.User)
             return;
 
-        if (TryComp<ContainerManagerComponent>(target, out var containerManager))
-        {
-            var containers = _container.GetAllContainers(target, containerManager);
-            foreach (var container in containers)
-                foreach (var entity in container.ContainedEntities)
-                    _empSystem.TryEmpEffects(entity, ent.Comp.EmpDrain, ent.Comp.EmpDuration);
-        }
+        EmpAllItemsInEntsContainers(ent, target);
 
         _empSystem.TryEmpEffects(target, ent.Comp.EmpDrain, ent.Comp.EmpDuration);
 
@@ -44,5 +38,18 @@ public sealed class EmpOnUseSystem : EntitySystem
         _audioSystem.PlayPvs(ent.Comp.EmpSound, ent);
 
         args.Handled = true;
+    }
+
+    private void EmpAllItemsInEntsContainers(Entity<EmpOnUseComponent> ent, EntityUid target)
+    {
+        if (!TryComp<ContainerManagerComponent>(target, out var containerManager))
+            return;
+        var containers = _container.GetAllContainers(target, containerManager);
+        foreach (var container in containers)
+            foreach (var entity in container.ContainedEntities)
+            {
+                _empSystem.TryEmpEffects(entity, ent.Comp.EmpDrain, ent.Comp.EmpDuration);
+                EmpAllItemsInEntsContainers(ent, entity);
+            }
     }
 }
