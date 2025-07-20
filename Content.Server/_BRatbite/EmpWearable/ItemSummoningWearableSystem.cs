@@ -8,7 +8,8 @@ using Robust.Shared.Containers;
 namespace Content.Server._BRatbite.EmpWearable;
 
 /// <summary>
-/// This handles...
+/// This handles spawning in items for wearables.
+/// Functions very similarly to mansus grasp, but can take any entity.
 /// </summary>
 public sealed class ItemSummoningWearableSystem : EntitySystem
 {

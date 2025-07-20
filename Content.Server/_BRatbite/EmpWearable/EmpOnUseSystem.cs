@@ -9,7 +9,9 @@ using Robust.Shared.Containers;
 
 namespace Content.Server._BRatbite.EmpWearable;
 
-/// <inheritdoc/>
+/// <summary>
+/// This handles items that apply an EMP effect when used on a target.
+/// </summary>
 public sealed class EmpOnUseSystem : EntitySystem
 {
     [Dependency] private readonly EmpSystem _empSystem = default!;

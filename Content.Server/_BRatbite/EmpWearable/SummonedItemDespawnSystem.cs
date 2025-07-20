@@ -4,7 +4,10 @@ using Content.Shared.Interaction;
 
 namespace Content.Server._BRatbite.EmpWearable;
 
-/// <inheritdoc/>
+/// <summary>
+/// This handles despawning a summoned item after it has been used.
+/// Also manages starting the action cooldown after item usage.
+/// </summary>
 public sealed class SummonedItemDespawnSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
