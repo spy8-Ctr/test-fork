@@ -59,16 +59,16 @@ public sealed class ItemSummoningWearableSystem : EntitySystem
 
         if (!_hands.TryPickup(args.Performer, summonedItem, emptyHand, animate: false))
         {
-            QueueDel(ent.Comp.SummonedEntity);
+            QueueDel(summonedItem);
             return;
         }
+
+        ent.Comp.SummonedEntity = summonedItem;
+        _actionsSystem.SetToggled(args.Action, true);
 
         if (!TryComp<SummonedItemDespawnComponent>(summonedItem, out var summonedItemComp))
             return;
 
-        ent.Comp.SummonedEntity = summonedItem;
         summonedItemComp.Creator = ent;
-
-        _actionsSystem.SetToggled(args.Action, true);
     }
 }
