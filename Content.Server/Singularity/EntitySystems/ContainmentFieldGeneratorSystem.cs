@@ -448,12 +448,12 @@ public sealed class ContainmentFieldGeneratorSystem : EntitySystem
                 fieldXForm.LocalRotation = rotatedAngle;
             }
 
-            if (TryComp<ContainmentFieldComponent>(newField, out var comp))
+            if (TryComp<ContainmentFieldComponent>(newField, out var comp)) # Ratbite - Start
             {
                 comp.BoundGenerators = new List<Entity<ContainmentFieldGeneratorComponent>>();
                 comp.BoundGenerators.Add(firstGen);
                 comp.BoundGenerators.Add(secondGen);
-            }
+            } # Ratbite - End
 
             fieldList.Add(newField);
             currentOffset += dirVec;
