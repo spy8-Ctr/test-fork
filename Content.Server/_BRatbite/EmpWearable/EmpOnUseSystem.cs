@@ -39,12 +39,8 @@ public sealed class EmpOnUseSystem : EntitySystem
         {
             var containers = _container.GetAllContainers(args.Target.Value, containerManager);
             foreach (var container in containers)
-            {
                 foreach (var entity in container.ContainedEntities)
-                {
                     _empSystem.TryEmpEffects(entity, ent.Comp.EmpDrain, ent.Comp.EmpDuration);
-                }
-            }
         }
 
         _empSystem.TryEmpEffects(args.Target.Value, ent.Comp.EmpDrain, ent.Comp.EmpDuration);
