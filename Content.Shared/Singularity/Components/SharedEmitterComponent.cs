@@ -130,8 +130,8 @@ public sealed partial class EmitterComponent : Component
     [DataField]
     public TimeSpan WarningCooldown = TimeSpan.FromSeconds(15);
 
-    [DataField("channels", customTypeSerializer: typeof(PrototypeIdHashSetSerializer<RadioChannelPrototype>))]
-    public HashSet<string> WarningChannels = new();
+    [DataField]
+    public HashSet<ProtoId<RadioChannelPrototype>> WarningChannels = new();
 }
 
 [NetSerializable, Serializable]
