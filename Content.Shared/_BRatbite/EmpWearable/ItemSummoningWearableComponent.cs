@@ -12,8 +12,8 @@ namespace Content.Shared._BRatbite.EmpGlove;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ItemSummoningWearableComponent : Component
 {
-    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string SummonEntity = "TouchEmp";
+    [DataField]
+    public EntProtoId SummonEntity = "TouchEmp";
 
     public EntityUid SummonedEntity = EntityUid.Invalid;
 
