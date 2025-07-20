@@ -1,0 +1,57 @@
+- type: job
+  id: RedsightOverseer
+  name: Redsight Overseer
+  description: "Ensure security's compliance with spacelaw, act as the judge in legal disputes"
+  playTimeTracker: JobRedsightOverseer
+  requirements:
+    - !type:DepartmentTimeRequirement
+      department: Command
+      time: 7200 # 2 hours
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 7200 # 2 hours
+    - !type:RoleTimeRequirement
+      role: JobLawyer
+      time: 1800 # 30 mins
+    - !type:AgeRequirement
+      requiredAge: 21
+  goobcoins: 45
+  weight: 20
+  startingGear: RSOGear
+  icon: "JobIconNanotrasen"
+  supervisors: job-supervisors-centcom
+  canBeAntag: false
+  access:
+  - CentralCommand
+  - Maintenance
+  - External
+  - Command
+  - Brig
+  - Security
+  - Armory
+  - Maintenance
+  - Service
+  - Detective
+  - Cryogenics
+  special:
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant, BluespaceLifelineImplant ] # Go big, or go home.
+  - !type:AddComponentSpecial
+    components:
+      - type: CommandStaff
+      - type: Condemned
+        soulOwnedNotDevil: true
+
+- type: startingGear
+  id: RSOGear
+  equipment:
+    eyes: ClothingEyesGlassesRSO
+    gloves: ClothingHandsGlovesRSOShock
+    id: RSOPDA
+    ears: ClothingHeadsetAltCentCom
+    belt: ClothingBeltSecurityFilled
+    pocket1: ClothingMaskGasSecurity
+  storage:
+    back:
+    - CQCManual
+    - Flash
