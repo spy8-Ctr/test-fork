@@ -166,8 +166,8 @@ public sealed class AmeControllerSystem : EntitySystem
         group.UpdateCoreVisuals();
         UpdateDisplay(uid, controller.Stability, controller);
 
-        //if (controller.Stability <= 0)   Ratbite - Disabled explosive AME, too easy to sabotage
-        //    group.ExplodeCores();                  Instead, made overcharging have diminishing returns
+        if (controller.Stability <= 0)
+            group.ExplodeCores();
     }
 
     public void UpdateUi(EntityUid uid, AmeControllerComponent? controller = null)
