@@ -162,7 +162,7 @@ namespace Content.Server.Singularity.EntitySystems
                         component.NextWarning = _timing.CurTime + component.WarningCooldown;
                         foreach (var channel in component.WarningChannels)
                         {
-                            var title = "no ID found";
+                            var title = Loc.GetString("containment-field-emitter-no-id-found");
                             var getIdentityEvent = new TryGetIdentityShortInfoEvent(uid, args.User);
                             RaiseLocalEvent(getIdentityEvent);
                             if(getIdentityEvent.Title != null)

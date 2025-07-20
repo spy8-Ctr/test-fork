@@ -12,3 +12,5 @@ containment-field-buffer-drop-loose =
 containment-field-emitter-powering-off =
     Note: A containment field emitter is currently being powered off.
     ID of individual performing action: {$id}
+
+containment-field-emitter-no-id-found = no ID found
