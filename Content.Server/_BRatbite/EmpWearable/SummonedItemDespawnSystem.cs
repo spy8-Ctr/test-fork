@@ -5,7 +5,7 @@ using Content.Shared.Interaction;
 namespace Content.Server._BRatbite.EmpWearable;
 
 /// <inheritdoc/>
-public sealed class SummonedItemDespawnSystem : SharedSummonedItemDespawnSystem
+public sealed class SummonedItemDespawnSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
     /// <inheritdoc/>

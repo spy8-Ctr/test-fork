@@ -10,7 +10,7 @@ using Robust.Shared.Containers;
 namespace Content.Server._BRatbite.EmpWearable;
 
 /// <inheritdoc/>
-public sealed class EmpOnUseSystem : SharedEmpOnUseSystem
+public sealed class EmpOnUseSystem : EntitySystem
 {
     [Dependency] private readonly EmpSystem _empSystem = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
