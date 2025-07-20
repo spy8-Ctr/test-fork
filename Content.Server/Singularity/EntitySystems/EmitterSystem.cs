@@ -190,7 +190,7 @@ namespace Content.Server.Singularity.EntitySystems
             }
         }
 
-        private void OnPowerOff(EntityUid uid, EmitterComponent component, PowerOffDoAfterEvent args) # Ratbite - Start
+        private void OnPowerOff(EntityUid uid, EmitterComponent component, PowerOffDoAfterEvent args) //Ratbite - Start
         {
             if (args.Cancelled)
                 return;
@@ -198,7 +198,7 @@ namespace Content.Server.Singularity.EntitySystems
             SwitchOff(uid, component);
             _popup.PopupEntity(Loc.GetString("comp-emitter-turned-off",
                 ("target", uid)), uid, args.User);
-        } # Ratbite  - End
+        } //Ratbite  - End
 
         private void OnGetVerb(EntityUid uid, EmitterComponent component, GetVerbsEvent<Verb> args)
         {

@@ -259,15 +259,15 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
     {
         if (!CanConsumeEntity(hungry, morsel, eventHorizon))
         {
-            if (TryComp<ContainmentFieldComponent>(morsel, out var field))
+            if (TryComp<ContainmentFieldComponent>(morsel, out var field)) //Ratbite - Start
             {
                 foreach (var gen in field.BoundGenerators)
                 {
-                    if (eventHorizon.ContainingFieldGenerators.Add(gen))
+                    eventHorizon.ContainingFieldGenerators.Add(gen);
                 }
             }
             return false;
-        }
+        } //Ratbite - End
 
         ConsumeEntity(hungry, morsel, eventHorizon, outerContainer);
         return true;
@@ -286,7 +286,6 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
             var validLowest = lowest.Value;
             if (validLowest.Comp.PowerBuffer != eventHorizon.LowestPowerGenBuffer)
             {
-                Log.Info("Lowest buffer: "+validLowest.Comp.PowerBuffer);
                 UpdateBuffer(eventHorizon, validLowest);
             }
         }
@@ -298,8 +297,6 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
         var oldpercent = (eventHorizon.LowestPowerGenBuffer - gen.Comp.PowerMinimum) / (float)(gen.Comp.PowerMaximum - gen.Comp.PowerMinimum);
 
         var displayPercent = MathF.Round(newpercent * 100f);
-
-        Log.Info("Updating buffer: "+newpercent+" "+oldpercent);
 
         string? message = null;
 
