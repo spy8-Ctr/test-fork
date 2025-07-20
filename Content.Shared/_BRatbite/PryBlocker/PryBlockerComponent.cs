@@ -4,7 +4,4 @@ namespace Content.Shared._BRatbite.PryBlocker;
 /// This is used for...
 /// </summary>
 [RegisterComponent]
-public sealed partial class PryBlockerComponent : Component
-{
-    
-}
+public sealed partial class PryBlockerComponent : Component;

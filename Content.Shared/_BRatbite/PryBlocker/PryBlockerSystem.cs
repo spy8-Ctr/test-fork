@@ -13,8 +13,6 @@ public sealed class PryBlockerSystem : EntitySystem
         SubscribeLocalEvent<PryBlockerComponent, ToolPryAttemptEvent>(OnToolPryAttempt);
     }
 
-    private void OnToolPryAttempt(Entity<PryBlockerComponent> ent, ref ToolPryAttemptEvent args)
-    {
+    private void OnToolPryAttempt(Entity<PryBlockerComponent> ent, ref ToolPryAttemptEvent args) =>
         args.Cancel();
-    }
 }

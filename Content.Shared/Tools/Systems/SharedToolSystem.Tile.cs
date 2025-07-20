@@ -122,9 +122,7 @@ public abstract partial class SharedToolSystem
         var anchored = _maps.GetAnchoredEntities(gridUid, mapGrid, clickLocation);
         var tilePryEvent = new ToolPryAttemptEvent(user, ent);
         foreach (var anchor in anchored)
-        {
             RaiseLocalEvent(anchor, tilePryEvent);
-        }
 
         if (tilePryEvent.Cancelled)
             return false;
