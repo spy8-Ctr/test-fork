@@ -280,9 +280,8 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
         {
             var lowest = GetLowestPower(eventHorizon.ContainingFieldGenerators);
             if (lowest == null)
-            {
                 continue;
-            }
+
             var validLowest = lowest.Value;
             if (validLowest.Comp.PowerBuffer != eventHorizon.LowestPowerGenBuffer)
             {
