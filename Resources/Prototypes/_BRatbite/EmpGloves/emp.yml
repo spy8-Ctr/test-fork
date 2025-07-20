@@ -10,8 +10,8 @@
 
 - type: entity
   id: TouchEmp
-  name: Sparking Gloves
-  description: Gloves sparking with electric energy
+  name: EMP Glove
+  description: Your hand sparks with electromagnetic energy
   categories: [ HideSpawnMenu ]
   components:
   - type: Unremoveable #Dont let the player drop an item that's been summoned. If you need that, remove this.
@@ -20,7 +20,7 @@
   - type: EmpOnUse #When used on a target, that target is hit with an emp effect
     #Other targeted on use effects can be added if it has a component for it
   - type: Sprite
-    sprite: _Goobstation/Heretic/mansus_grasp.rsi
+    sprite: _BRatbite/CharEffects/shock_glove.rsi
     state: icon
   - type: Appearance
   - type: PointLight #Blue light, since EMP's have blue effects
