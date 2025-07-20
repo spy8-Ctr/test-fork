@@ -25,21 +25,21 @@ public sealed class ItemSummoningWearableSystem : EntitySystem
         SubscribeLocalEvent<ItemSummoningWearableComponent, MapInitEvent>(OnMapInit);
     }
 
-    private void OnMapInit(EntityUid uid, ItemSummoningWearableComponent component, MapInitEvent args)
+    private void OnMapInit(Entity<ItemSummoningWearableComponent> ent, ref MapInitEvent args)
     {
-        _actionContainer.EnsureAction(uid, ref component.ActionEntity, component.Action);
-        Dirty(uid, component);
+        _actionContainer.EnsureAction(ent, ref ent.Comp.ActionEntity, ent.Comp.Action);
+        Dirty(ent);
     }
 
-    private void OnGetActions(EntityUid uid, ItemSummoningWearableComponent component, GetItemActionsEvent args)
+    private void OnGetActions(Entity<ItemSummoningWearableComponent> ent, ref GetItemActionsEvent args)
     {
         if (!args.SlotFlags.HasValue)
             return;
 
-        if (!component.ValidSlots.HasFlag(args.SlotFlags))
+        if (!ent.Comp.ValidSlots.HasFlag(args.SlotFlags))
             return;
 
-        args.AddAction(component.ActionEntity);
+        args.AddAction(ent.Comp.ActionEntity);
     }
 
     private void OnSummonEmp(Entity<ItemSummoningWearableComponent> ent, ref ItemSummonActionEvent args)
