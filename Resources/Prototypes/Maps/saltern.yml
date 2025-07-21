@@ -32,7 +32,7 @@
 - type: gameMap
   id: Saltern
   mapName: 'Saltern'
-  mapPath: mapPath: /Maps/_BRatbite/Ratbite_Supported/Saltern.yml
+  mapPath: /Maps/_BRatbite/Ratbite_Supported/Saltern.yml
   minPlayers: 10
   maxPlayers: 45
   fallback: true

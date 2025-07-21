@@ -56,7 +56,7 @@
 - type: loadout
   id: EyesGlassesRedsights
   equipment:
-    outerClothing: ClothingEyesGlassesRSO
+    eyes: ClothingEyesGlassesRSO
 
 
 # Mask

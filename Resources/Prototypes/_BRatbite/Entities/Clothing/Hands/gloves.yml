@@ -1,11 +1,11 @@
 - type: entity
   parent: [ClothingHandsGlovesColorBlack, BaseSecurityEngineeringContraband]
   id: ClothingHandsGlovesRSOShock
-  name: Redsight "Verdict" EMP Combat Gloves
+  name: Redsight "Scumgrips" EMP Combat Gloves
   description: A pair of combat gloves outfitted to deliver a highly localized EMP on contact
   components:
   - type: Sprite
-    sprite: Clothing/Hands/Gloves/combat.rsi
+    sprite: _BRatBite/Clothing/Hands/Gloves/RSOShockGloves.rsi
   - type: Clothing
     sprite: Clothing/Hands/Gloves/combat.rsi
   - type: Insulated

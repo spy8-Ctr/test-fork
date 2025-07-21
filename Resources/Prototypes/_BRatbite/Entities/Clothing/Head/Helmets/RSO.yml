@@ -12,3 +12,6 @@
     tags:
     - WhitelistChameleon
     - SecurityHelmet
+  - type: HideLayerClothing
+  slots:
+  - Hair

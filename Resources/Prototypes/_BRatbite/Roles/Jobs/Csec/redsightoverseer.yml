@@ -18,8 +18,8 @@
   goobcoins: 45
   weight: 20
   startingGear: RSOGear
-  icon: "JobIconNanotrasen"
-  supervisors: job-supervisors-centcom
+  icon: "JobIconRSO"
+  supervisors: job-supervisors-centcom job-supervisors-hos
   canBeAntag: false
   access:
   - CentralCommand
@@ -35,7 +35,7 @@
   - Cryogenics
   special:
   - !type:AddImplantSpecial
-    implants: [ MindShieldImplant, BluespaceLifelineImplant ] # Go big, or go home.
+    implants: [ MindShieldImplant, BluespaceLifelineImplant ] # CC gets bluespace
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
@@ -45,7 +45,7 @@
 - type: startingGear
   id: RSOGear
   equipment:
-    eyes: ClothingEyesGlassesRSO
+    suitstorage: WeaponSubMachineSmart
     gloves: ClothingHandsGlovesRSOShock
     id: RSOPDA
     ears: ClothingHeadsetAltCentCom
@@ -54,4 +54,7 @@
   storage:
     back:
     - CQCManual
+    - BookSpaceLaw
     - Flash
+    - MagazineSmart
+    - MagazineSmart
