@@ -28,7 +28,7 @@
 - type: gameMap
   id: Core
   mapName: 'Core'
-  mapPath: /Maps/_BRatbite/Ratbite_Supported/Core.yml # Ratbite
+  mapPath: /Maps/_BRatbite/Ratbite_Supported/core.yml # Ratbite
   minPlayers: 50
   maxPlayers: 80
   stations:
