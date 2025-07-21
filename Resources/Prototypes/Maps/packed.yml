@@ -34,7 +34,7 @@
 - type: gameMap
   id: Packed
   mapName: 'Packed'
-  mapPath: /Maps/_BRatbite/Ratbite_Supported/Packed.yml
+  mapPath: /Maps/_BRatbite/Ratbite_Supported/packed.yml
   minPlayers: 13
   maxPlayers: 45
   stations:
