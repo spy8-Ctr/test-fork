@@ -2,7 +2,7 @@
 - type: guideEntry
   id: Multi Round Perma SOP
   name: guide-entry-sop-multiround-brig
-  text: "/ServerInfo/_BRatbite/Guidebook/SoP/Legal/MultiRoundPerma.xml"
+  text: "/ServerInfo/_BRatbite/Guidebook/SoP/Legal/MultiRoundPermaSOP.xml"
   children:
   - Multi Round Perma Convictions SOP
   - Multi Round Perma Pardons SOP
