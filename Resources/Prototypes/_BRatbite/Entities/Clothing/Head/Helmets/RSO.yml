@@ -5,13 +5,10 @@
   description: A helmet often worn by redsight overseers to understate their individual identity and overstate THE LAW.
   components:
   - type: Sprite
-    sprite: _BRatbite/Clothing/Head/Helmets/RSOlawhelm.rsi
+    sprite: _BRatbite/Clothing/Head/Helmets/RSOLawhelm.rsi
   - type: Clothing
-    sprite: _BRatbite/Clothing/Head/Helmets/RSOlawhelm.rsi
+    sprite: _BRatbite/Clothing/Head/Helmets/RSOLawhelm.rsi
   - type: Tag
     tags:
     - WhitelistChameleon
     - SecurityHelmet
-  - type: HideLayerClothing
-  slots:
-  - Hair
