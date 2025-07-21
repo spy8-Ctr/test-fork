@@ -100,10 +100,18 @@ public sealed partial class AirAlarmComponent : Component
     [DataField("normalPort", customTypeSerializer: typeof(PrototypeIdSerializer<SourcePortPrototype>))]
     public string NormalPort = "AirNormal";
 
+
     public TimeSpan NextWarning = TimeSpan.Zero;
 
     public TimeSpan WarningCooldown = TimeSpan.FromSeconds(15);
 
     [DataField("channels", customTypeSerializer: typeof(PrototypeIdHashSetSerializer<RadioChannelPrototype>))]
     public HashSet<string> WarningChannels = new();
+
+    /// <summary>
+    /// Whether the panic wire is cut, forcing the alarm into panic mode.
+    /// </summary>
+    [DataField, ViewVariables]
+    public bool PanicWireCut;
+
 }
