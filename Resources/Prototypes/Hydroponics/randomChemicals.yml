@@ -5,11 +5,8 @@
 # SPDX-FileCopyrightText: 2024 lzk <124214523+lzk228@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
 # SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
 # SPDX-FileCopyrightText: 2025 coderabbitai[bot] <136622811+coderabbitai[bot]@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -25,11 +22,6 @@
     - Honk
     - BuzzochloricBees
     - Stimulants
-    # Goobstation
-    - Tranquility
-    - BingleJuice
-    - JuiceThatMakesYouHew
-    - Carpolin
   - quantity: 5
     weight: 1
     reagents:
@@ -51,9 +43,8 @@
     - ChangelingSting
     - CogChamp
     - JuiceThatMakesYouWeh
-    # Goobstation
+    # Goobstation - Start
     - Genecide
-    - Fentanyl
   - quantity: 5
     weight: 2
     reagents:
@@ -80,9 +71,7 @@
     - Cola
     - Diphenhydramine
     - Iron
-    # Goobstation
     - Ibuprofen
-    - Tilenol
   - quantity: 10
     weight: 3
     reagents:
@@ -117,7 +106,7 @@
     - Potassium
     - Fluorine
     - Aluminium
-    # Goobstation
+    # Goobstation - Start
     - Tirimol
     - Probital
   - quantity: 10

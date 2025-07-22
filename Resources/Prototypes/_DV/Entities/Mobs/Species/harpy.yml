@@ -157,13 +157,6 @@
       Male: SoundsHarpyMale
       Female: SoundsHarpyFemale
       Unsexed: SoundsHarpyFemale
-  - type: LanguageKnowledge # Einstein Engines - Language
-    speaks:
-    - TauCetiBasic
-    - ValyrianStandard
-    understands:
-    - TauCetiBasic
-    - ValyrianStandard
   - type: GenericVisualizer
     visuals:
       enum.HarpyVisualLayers.Singing:

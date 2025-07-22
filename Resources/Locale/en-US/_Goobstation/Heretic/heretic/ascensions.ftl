@@ -36,5 +36,3 @@ heretic-ascension-rust =
     Let me tell you a story.
     There are hills ahead, draped in rust. Rust that rots your heat. Mouth parched, soul weak, your tongue begins to bleed.
     I am decay incarnate. INEVITABLE AS A DYING STAR; IMPASSIVE AS THE WATERS. WITNESS MY ASCENSION!
-
-heretic-ascension-bingle = bungle

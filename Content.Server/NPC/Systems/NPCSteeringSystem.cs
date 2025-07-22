@@ -49,10 +49,8 @@
 // SPDX-FileCopyrightText: 2024 themias <89101928+themias@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
 // SPDX-FileCopyrightText: 2025 J <billsmith116@gmail.com>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
 // SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
@@ -395,17 +393,14 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
         var agentRadius = steering.Radius;
         var worldPos = _transform.GetWorldPosition(xform);
         var (layer, mask) = _physics.GetHardCollision(uid);
+
         // Use rotation relative to parent to rotate our context vectors by.
         var offsetRot = -_mover.GetParentGridAngle(mover);
-
         _modifierQuery.TryGetComponent(uid, out var modifier);
-        var body = _physicsQuery.GetComponent(uid);
-
-        var weightless = _gravity.IsWeightless(uid, body, xform);
         var moveSpeed = GetSprintSpeed(uid, modifier);
-        var acceleration = GetAcceleration((uid, modifier), weightless);
-        var friction = GetFriction((uid, modifier), weightless);
-
+        var acceleration = GetAcceleration((uid, modifier, xform, null)); // Goobstation
+        var friction = GetFriction((uid, modifier, xform, null)); // Goobstation
+        var body = _physicsQuery.GetComponent(uid);
         var dangerPoints = steering.DangerPoints;
         dangerPoints.Clear();
         Span<float> interest = stackalloc float[InterestDirections];
@@ -565,20 +560,25 @@ public sealed partial class NPCSteeringSystem : SharedNPCSteeringSystem
     }
 
     // <Goobstation>
-    private float GetAcceleration(Entity<MovementSpeedModifierComponent?> ent, bool weightless)
+    private float GetAcceleration(Entity<MovementSpeedModifierComponent?, TransformComponent?, PhysicsComponent?> ent)
     {
-        if (!Resolve(ent, ref ent.Comp, false))
+        var weightless = _gravity.IsWeightless(ent, ent.Comp3, ent.Comp2);
+
+        if (!Resolve(ent, ref ent.Comp1, false))
             return weightless ? MovementSpeedModifierComponent.DefaultWeightlessAcceleration : MovementSpeedModifierComponent.DefaultAcceleration;
 
-        return weightless ? ent.Comp.WeightlessAcceleration : ent.Comp.Acceleration;
+        return weightless ? ent.Comp1.WeightlessAcceleration : ent.Comp1.Acceleration;
     }
 
-    private float GetFriction(Entity<MovementSpeedModifierComponent?> ent, bool weightless)
+    // TODO: make this upstream's problem since friction as-is is kinda scuffed to get properly
+    private float GetFriction(Entity<MovementSpeedModifierComponent?, TransformComponent?, PhysicsComponent?> ent)
     {
-        if (!Resolve(ent, ref ent.Comp, false))
+        var weightless = _gravity.IsWeightless(ent, ent.Comp3, ent.Comp2);
+
+        if (!Resolve(ent, ref ent.Comp1, false))
             return weightless ? MovementSpeedModifierComponent.DefaultWeightlessFriction : MovementSpeedModifierComponent.DefaultFriction;
 
-        return weightless ? ent.Comp.WeightlessFriction : ent.Comp.Friction;
+        return weightless ? ent.Comp1.WeightlessFriction : ent.Comp1.Friction;
     }
     // </Goobstation>
 
