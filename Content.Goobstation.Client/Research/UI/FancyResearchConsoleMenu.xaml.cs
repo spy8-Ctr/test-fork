@@ -75,10 +75,6 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
     /// For dragging mostly
     /// </summary>
     private Vector2 _position = new Vector2(45, 250);
-    private float _zoom = 1f;
-    private const float MinZoom = 0.5f;
-    private const float MaxZoom = 2f;
-    private const float ZoomSpeed = 0.125f;
 
     public FancyResearchConsoleMenu()
     {
@@ -116,7 +112,7 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
             DragContainer.AddChild(control);
 
             // Set position for all tech, relating to _position
-            LayoutContainer.SetPosition(control, _position + proto.Position * 150 * _zoom);
+            LayoutContainer.SetPosition(control, _position + proto.Position * 150);
             control.SelectAction += SelectTech;
 
             if (tech.Key == CurrentTech)
@@ -185,34 +181,6 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
         }
     }
 
-    protected override void MouseWheel(GUIMouseWheelEventArgs args)
-    {
-        base.MouseWheel(args);
-
-        var oldZoom = _zoom;
-
-        if (args.Delta.Y > 0)
-            _zoom += ZoomSpeed;
-        else
-            _zoom -= ZoomSpeed;
-
-        _zoom = Math.Clamp(_zoom, MinZoom, MaxZoom);
-
-        if (MathHelper.CloseTo(oldZoom, _zoom))
-            return;
-
-        foreach (var child in DragContainer.Children)
-        {
-            if (child is not FancyResearchConsoleItem research)
-                continue;
-
-            var pos = research.Prototype.Position * 150;
-            LayoutContainer.SetPosition(child, _position + pos * _zoom);
-            research.SetScale(_zoom);
-        }
-        args.Handle();
-    }
-
     /// <summary>
     /// Raised when LMB is pressed at <see cref="DragContainer"/>
     /// </summary>
@@ -263,7 +231,7 @@ public sealed partial class FancyResearchConsoleMenu : FancyWindow
             if (item is not FancyResearchConsoleItem research)
                 continue;
 
-            LayoutContainer.SetPosition(item, _position + research.Prototype.Position * 150 * _zoom);
+            LayoutContainer.SetPosition(item, _position + research.Prototype.Position * 150);
         }
     }
 

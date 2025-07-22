@@ -29,8 +29,6 @@
 // SPDX-FileCopyrightText: 2024 plykiya <plykiya@protonmail.com>
 // SPDX-FileCopyrightText: 2024 Арт <123451459+JustArt1m@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 August Eymann <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -76,15 +74,14 @@ public sealed class SlippingTest : MovementTest
         Assert.That(sys.Slipped, Does.Not.Contain(SEntMan.GetEntity(Player)));
 
         // Walking over the banana slowly does not trigger a slip.
-        await SetKey(EngineKeyFunctions.Walk, BoundKeyState.Down); // Goobstation - Simulate Toggling the Key
-        await SetKey(EngineKeyFunctions.Walk, BoundKeyState.Up); // Goobstation
+        await SetKey(EngineKeyFunctions.Walk, BoundKeyState.Down);
         await Move(DirectionFlag.East, 1f);
         Assert.That(Delta(), Is.LessThan(0.5f));
         Assert.That(sys.Slipped, Does.Not.Contain(SEntMan.GetEntity(Player)));
         AssertComp<KnockedDownComponent>(false, Player);
 
         // Moving at normal speeds does trigger a slip.
-        await SetKey(EngineKeyFunctions.Walk, BoundKeyState.Down); // solstice is a MAJOR nerd.
+        await SetKey(EngineKeyFunctions.Walk, BoundKeyState.Up);
         await Move(DirectionFlag.West, 1f);
         Assert.That(sys.Slipped, Does.Contain(SEntMan.GetEntity(Player)));
         AssertComp<KnockedDownComponent>(true, Player);
