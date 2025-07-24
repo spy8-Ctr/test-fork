@@ -1,4 +1,4 @@
-- type: damageModifierSet #Ratbite - NoDamage modifier for registering hit without damage, for Containment Field Generator
+- type: damageModifierSet #Ratbite - NoDamage modifier for registering hit without damage, for Containment Field Generator # Sol - That's not how it works.
   id: NoDamage
   coefficients:
     Blunt: 0.0
