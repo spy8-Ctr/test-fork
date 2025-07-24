@@ -34,7 +34,7 @@
   - type: Unremoveable
   - type: Item
   - type: SummonedItemDespawn
-  - type: EmpOnUs
+  - type: EmpOnUse
   - type: Sprite
     sprite: _BRatbite/CharEffects/shock_glove.rsi
     state: icon
