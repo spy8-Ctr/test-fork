@@ -4,6 +4,6 @@
   description: Shock the target with an EMP, disabling their electronics.
   components:
   - type: InstantAction
-    icon: { sprite: _BRatBite/EmpWearable/Action/emp.rsi, state: shock-off }
-    iconOn: { sprite: _BRatBite/EmpWearable/Action/emp.rsi, state: shock-on }
+    icon: { sprite: _BRatBite/Actions/emp.rsi, state: shock-off }
+    iconOn: { sprite: _BRatBite/Actions/emp.rsi, state: shock-on }
     event: !type:ItemSummonActionEvent
