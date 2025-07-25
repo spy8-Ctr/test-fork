@@ -185,7 +185,12 @@
   - type: Clothing
     sprite: _Goobstation/Objects/Weapons/Guns/Rifles/wspr.rsi
   - type: Gun
-    fireRate: 5.5
+    availableModes:
+    - Burst
+    selectedMode: Burst
+    burstFireRate: 20
+    shotsPerBurst: 3
+    burstCooldown: 0.25
     projectileSpeed: 35
     soundGunshot:
       path: /Audio/_Goobstation/Weapons/Guns/Gunshots/suppressed_smg.ogg
