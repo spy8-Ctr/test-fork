@@ -94,17 +94,17 @@ public sealed partial class ChangelingIdentityComponent : Component
     /// <summary>
     ///     The default stasis time (in s).
     /// </summary>
-    public readonly int DefaultStasisTime = 15;
+    public readonly int DefaultStasisTime = 30;
 
     /// <summary>
     ///     The typical longest time that stasis can last (in s).
     /// </summary>
-    public readonly int MaxStasisTime = 45;
+    public readonly int MaxStasisTime = 90;
 
     /// <summary>
     ///     The time a changeling must stay in stasis upon taking catastrophic damage (in s).
     /// </summary>
-    public readonly int CatastrophicStasisTime = 60;
+    public readonly int CatastrophicStasisTime = 120;
 
     /// <summary>
     ///     Time in seconds the changeling must spend in stasis.

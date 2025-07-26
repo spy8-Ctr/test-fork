@@ -18,13 +18,7 @@
 // SPDX-FileCopyrightText: 2024 username <113782077+whateverusername0@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2024 whateverusername0 <whateveremail>
 // SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Conchelle <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Killerqu00 <47712032+Killerqu00@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 Misandry <mary@thughunt.ing>
-// SPDX-FileCopyrightText: 2025 SX-7 <92227810+SX-7@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 ScarKy0 <106310278+ScarKy0@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
 //
@@ -44,7 +38,7 @@ using Robust.Shared.Random;
 using System.Linq;
 using System.Text;
 using Content.Goobstation.Common.CCVar;
-using Content.Goobstation.Common.ServerCurrency;
+using Content.Server._durkcode.ServerCurrency;
 using Content.Server.Objectives.Commands;
 using Content.Shared.CCVar;
 using Content.Shared.Prototypes;
@@ -52,7 +46,7 @@ using Content.Shared.Roles.Jobs;
 using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Utility;
-using Content.Shared.Administration.Logs;
+using Robust.Shared.Configuration;
 
 namespace Content.Server.Objectives;
 
@@ -66,9 +60,8 @@ public sealed class ObjectivesSystem : SharedObjectivesSystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly EmergencyShuttleSystem _emergencyShuttle = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
-    [Dependency] private readonly ICommonCurrencyManager _currencyMan = default!;
+    [Dependency] private readonly ServerCurrencyManager _currencyMan = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
 
     private IEnumerable<string>? _objectives;
 
@@ -219,18 +212,6 @@ public sealed class ObjectivesSystem : SharedObjectivesSystem
                     var progress = info.Value.Progress;
                     totalObjectives++;
 
-                    // Goob (even tho the entire file got massacred by John already)
-                    // Logging objective status for admins
-                    IFormattable? username = ToPrettyString(mind.CurrentEntity);
-                    if (username is null &&
-                        userid.HasValue &&
-                        _player.TryGetPlayerData(userid.Value, out var data))
-                        username = System.Runtime.CompilerServices.FormattableStringFactory.Create(data.UserName);
-
-                    _adminLog.Add(Shared.Database.LogType.AntagObjective,
-                                    Shared.Database.LogImpact.Low,
-                                    $"{username:subject} achieved {progress}% of objective {objectiveTitle}");
-
                     agentSummary.Append("- ");
                     if (!_showGreentext)
                     {
@@ -245,7 +226,7 @@ public sealed class ObjectivesSystem : SharedObjectivesSystem
                         ));
                         completedObjectives++;
 
-                        // Easiest place to give people points for completing objectives lol
+                         // Easiest place to give people points for completing objectives lol
                         if(userid.HasValue)
                             _currencyMan.AddCurrency(userid.Value, _goobcoinsPerGreentext * _goobcoinsServerMultiplier);
                     }
