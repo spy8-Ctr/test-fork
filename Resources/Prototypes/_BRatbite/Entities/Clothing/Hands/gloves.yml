@@ -36,7 +36,7 @@
   - type: SummonedItemDespawn
   - type: EmpOnUse
   - type: Sprite
-    sprite: _BRatbite/CharEffects/shock_glove.rsi
+    sprite: _BRatBite/CharEffects/shock_glove.rsi
     state: icon
   - type: Appearance
   - type: PointLight
