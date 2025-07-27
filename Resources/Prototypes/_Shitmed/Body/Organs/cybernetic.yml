@@ -1,11 +1,7 @@
 # SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-<<<<<<< HEAD
 # SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-=======
->>>>>>> 8ca79452a6 (Cybernetic Organs (#3335))
 # SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
 # SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
 #
@@ -13,26 +9,16 @@
 
 - type: entity
   id: BaseCyberneticOrgan
-<<<<<<< HEAD
   parent: BaseHumanOrgan
-=======
-  parent: BaseItem
->>>>>>> 8ca79452a6 (Cybernetic Organs (#3335))
   abstract: true
   components:
   - type: Cybernetics
   - type: Sprite
     sprite: _Shitmed/Mobs/Species/Misc/Cybernetics/organs.rsi
-<<<<<<< HEAD
   - type: Tag
     tags:
     - Organ
-<<<<<<< HEAD
     # not meat
-=======
->>>>>>> 8ca79452a6 (Cybernetic Organs (#3335))
-=======
->>>>>>> 5747c3a588 (cyber eye bugfix (#3401))
 
 # Eyes
 
@@ -42,13 +28,9 @@
   name: cybernetic eyes
   description: A pair of cybernetic eyes that enhance your vision, and protect you from eye damage.
   components:
-<<<<<<< HEAD
   - type: Cybernetics
   - type: Sprite
     sprite: _Shitmed/Mobs/Species/Misc/Cybernetics/organs.rsi
-=======
-  - type: Sprite
->>>>>>> 8ca79452a6 (Cybernetic Organs (#3335))
     state: eyes
   - type: Organ
     intCap: 21
@@ -57,14 +39,9 @@
       Normal: 21
       Damaged: 11
       Destroyed: 0
-    slotId: eyes
     onAdd:
     - type: FlashImmunity
     - type: EyeProtection
-  - type: Tag
-    tags:
-    - Eyes
-  - type: Eyes
 
 - type: entity
   parent: BasicCyberneticEyes
