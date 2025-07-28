@@ -19,5 +19,5 @@
     job_id: RedsightOverseer
   - type: Sprite
     layers:
-      - state: green
-      - state: redsightoverseer
+    - state: green
+    - state: ertleader

@@ -65,7 +65,7 @@
   # ratbite rebalance
   - type: StaminaDamageOnHit # goob edited
     damage: 30
-    lightAttackDamageMultiplier: 5
+    lightAttackDamageMultiplier: 1
     lightAttackOvertimeDamageMultiplier: 0
     sound: /Audio/Weapons/egloves.ogg
   - type: StaminaDamageOnCollide # goob edited

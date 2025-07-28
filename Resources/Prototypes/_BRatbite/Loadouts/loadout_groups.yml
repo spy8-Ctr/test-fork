@@ -23,7 +23,7 @@
 
 - type: loadoutGroup
   id: RedsightOverseerHead
-  name: RSO Headwear
+  name: loadout-group-rso-head
   minLimit: 0
   loadouts:
   - RedsightOverseerLawHelm
@@ -31,28 +31,28 @@
 
 - type: loadoutGroup
   id: RedsightOverseerJumpsuit
-  name: RSO Jumpsuit
+  name: loadout-group-rso-jumpsuit
   minLimit: 1
   loadouts:
   - RedsightOverseerInsideJumpsuit
 
 - type: loadoutGroup
   id: RedsightOverseerOuter
-  name: RSO Armor
+  name: loadout-group-rso-outerclothing
   minLimit: 1
   loadouts:
   - RedsightOverseerArmoredJack
 
 - type: loadoutGroup
   id: RedsightOverseerEyes
-  name: RSO Redsights
+  name: loadout-group-rso-eyes
   minLimit: 1
   loadouts:
   - EyesGlassesRedsights
 
 - type: loadoutGroup
   id: RedsightOverseerBack
-  name: RSO Back
+  name: loadout-group-rso-back
   minLimit: 1
   loadouts:
   - RSOBackpack
