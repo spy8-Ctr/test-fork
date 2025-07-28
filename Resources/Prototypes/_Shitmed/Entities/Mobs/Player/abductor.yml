@@ -108,20 +108,21 @@
   #   department: Security
   #   time: 10800 #3 hours - Ratbite - End
 
-  - type: RandomMetadata
-    nameSegments:
-      - AbductorAgentPrefix
-      - AbductorNames
-  - type: Tag # Ignore AbductorScientist tag
-    tags:
-      - Abductor
-      - CanPilot
-      - FootstepSound
-      - DoorBumpOpener
-  - type: AbductorScientist # Should be removed when we have proper teleportation system
-  - type: Loadout
-    prototypes:
-      - AbductorAgentGear
+# Ratbite TF is this?
+#  - type: RandomMetadata
+#    nameSegments:
+#      - AbductorAgentPrefix
+#      - AbductorNames
+#  - type: Tag # Ignore AbductorScientist tag
+#    tags:
+ #     - Abductor
+#      - CanPilot
+#      - FootstepSound
+#      - DoorBumpOpener
+#  - type: AbductorScientist # Should be removed when we have proper teleportation system
+#  - type: Loadout
+ #   prototypes:
+ #     - AbductorAgentGear
 
 # Gearsets
 
