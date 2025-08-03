@@ -272,6 +272,8 @@
       prob: 0.15
     - id: DoorJack
       prob: 0.05 #Goob content
+    - id: MoblileSpeaker
+      prob: 0.1 #Ratbite
     # Tools
     - !type:NestedSelector
       tableId: MaintToolsTable
