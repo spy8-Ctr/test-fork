@@ -520,7 +520,7 @@ public sealed class ToggleableClothingSystem : EntitySystem
             EquipClothing(user, toggleable, attachedUid, slot!);
             ForceSuitStorage(user, suitStorageItem);
         }
-    }
+
 
     /// <summary>
     ///     Toggle function for toggling multiple clothings at once
