@@ -254,6 +254,10 @@
   sounds:
     Squish:
       collection: Squishes
+    Bubble: # Imp
+      collection: Bubbles # Imp
+    Pop: # Imp
+      collection: Pops # Imp
     Scream:
       collection: MaleScreams
     Laugh:
@@ -300,6 +304,10 @@
   sounds:
     Squish:
       collection: Squishes
+    Bubble: # Imp
+      collection: Bubbles # Imp
+    Pop: # Imp
+      collection: Pops # Imp
     Scream:
       collection: FemaleScreams
     Laugh:
@@ -690,6 +698,8 @@
         volume: -6
     Salute:
       collection: Salutes
+    Crack: # Imp
+      collection: Cracks # Imp
 
 - type: emoteSounds
   id: DionaBodyEmotes
@@ -704,6 +714,8 @@
       path: /Audio/Voice/Diona/diona_salute.ogg
       params:
        volume: -5
+    Crack: # Imp
+      collection: Cracks # Imp
 
 - type: emoteSounds
   id: ReptilianBodyEmotes
@@ -720,6 +732,8 @@
         volume: -6
     Salute:
       collection: Salutes
+    Crack: # Imp
+      collection: Cracks # Imp
 
 # mobs
 - type: emoteSounds
