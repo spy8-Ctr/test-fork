@@ -231,6 +231,7 @@
     - !type:AllSelector
       - id: MmarPlushie #Ratbites
       - id: PlushieAxer #Ratbites
+      - id: SmokeyPlushie #Ratbites
     # Uncommon Group
     - !type:GroupSelector
       weight: 23

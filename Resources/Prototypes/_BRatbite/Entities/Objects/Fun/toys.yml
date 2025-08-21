@@ -57,3 +57,33 @@
         Blunt: 0
     soundHit:
       path: /Audio/_EinsteinEngines/Voice/Shadowkin/mar.ogg
+
+- type: entity
+  parent: BasePlushie
+  id: SmokeyPlushie
+  name: smokey plushie
+  description: We made smokey into a marketable plushie.
+  components:
+  - type: Sprite
+    sprite: _BRatBites/Objects/Fun/toys.rsi
+    state: smokeyplushie
+  - type: Item
+    heldPrefix: smokeyplushie
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Voice/Moth/moth_scream.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Voice/Moth/moth_laugh.ogg
+  - type: EmitSoundOnTrigger
+    sound:
+      path: /Audio/Voice/Moth/moth_chitter.ogg
+  - type: EmitSoundOnCollide
+    sound:
+      path: /Audio/Voice/Moth/moth_squeak.ogg
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 0
+    soundHit:
+      path: /Audio/Voice/Moth/moth_scream.ogg
