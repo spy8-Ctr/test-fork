@@ -264,7 +264,7 @@
     clothingPrototypes:
       head: ClothingHeadHelmetHardsuitBasic
 
-#Atmospherics Hardsuit - goob - not used
+#Atmospherics Hardsuit - Bevvrat - USED (THE MODSUIT SUCKS)
 - type: entity
   parent: [ClothingOuterHardsuitBase, BaseEngineeringContraband]
   id: ClothingOuterHardsuitAtmos
@@ -276,7 +276,7 @@
   - type: Clothing
     sprite: Clothing/OuterClothing/Hardsuits/atmospherics.rsi
   - type: PressureProtection
-    highPressureMultiplier: 0.02
+    highPressureMultiplier: 5 #Atmos suit doesnt protect from atmos :clueless:
     lowPressureMultiplier: 1000
   - type: TemperatureProtection
     heatingCoefficient: 0.001
@@ -288,14 +288,14 @@
   - type: Armor
     modifiers:
       coefficients:
-        Blunt: 0.9
-        Slash: 0.9
+        Blunt: 0.95 #Ratbites
+        Slash: 0.95 #Ratbites
         Piercing: 0.9
-        Heat: 0.8
-        Radiation: 0.15
+        Heat: 0.45 #Ratbites, why was it so fucking low
+        Radiation: 0.5 #Ratbites, why was this so fucking high
   - type: ClothingSpeedModifier
-    walkModifier: 0.7
-    sprintModifier: 0.7
+    walkModifier: 0.8 #Ratbites
+    sprintModifier: 0.8 #Ratbites
   - type: HeldSpeedModifier
   - type: ToggleableClothing # Goobstation - Modsuits change
     clothingPrototypes:
@@ -530,7 +530,7 @@
     modifiers:
       coefficients:
         Blunt: 0.5 #Ratbite
-        Slash: 0.5 #Ratbite 
+        Slash: 0.5 #Ratbite
         Piercing: 0.4 #Ratbite
         Heat: 0.7 #Ratbite
         Caustic: 0.7
