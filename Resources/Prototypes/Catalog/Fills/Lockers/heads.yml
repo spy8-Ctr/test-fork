@@ -409,6 +409,8 @@
     # Shitmed
     - id: MedicalBiofabricatorFlatpack
     # Goobstation End
+    - id: OmnimedTool #Ratbites
+    - id: ClothingHandsGlovesSurgical #Ratbites
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable
