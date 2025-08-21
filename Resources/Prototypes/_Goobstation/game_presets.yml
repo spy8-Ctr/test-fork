@@ -175,7 +175,7 @@
   name: sleeper-title
   description: sleeper-description
   showInVote: true
-  minPlayers: 5
+  minPlayers: 3 # Ratbites, lowering pop needed.
   rules:
     - PermaBrig # RatBite - Multi-Round brig system
     - CalmDynamic
@@ -191,8 +191,8 @@
     - combatdynamic
   name: guide-title
   description: guide-description
-  showInVote: false
-  minPlayers: 25
+  showInVote: true # Ratbites, Reintroducing Gamedirector as its more stable than secret+
+  minPlayers: 18 # Ratbites, lowering pop needed.
   rules:
     - PermaBrig # RatBite - Multi-Round brig system
     - CombatDynamic
@@ -209,7 +209,7 @@
     - turbulence
   name: secretplus-low-title
   description: secretplus-low-description
-  showInVote: true
+  showInVote: false #Ratbites, Secretplus violates gamerules and is impossible to track, fuck ts shit...
   rules:
     - PermaBrig # RatBite - Multi-Round brig system
     - SecretPlusLow
@@ -223,7 +223,7 @@
     - entropy
   name: secretplus-mid-title
   description: secretplus-mid-description
-  showInVote: true
+  showInVote: false #Ratbites
   rules:
     - PermaBrig # RatBite - Multi-Round brig system
     - SecretPlusMid
@@ -238,7 +238,7 @@
     - chaos
   name: secretplus-admeme-title
   description: secretplus-admeme-description
-  showInVote: false # 1984
+  showInVote: false # Meds.
   rules:
     - SecretPlusAdmeme
     - LavalandStormScheduler
@@ -251,7 +251,7 @@
     - survivalnew
   name: survivalplus-title
   description: survivalplus-description
-  showInVote: true
+  showInVote: true #Keep it for now, but may also be butched.
   rules:
     - PermaBrig # RatBite - Multi-Round brig system
     - SecretPlusRampingMid

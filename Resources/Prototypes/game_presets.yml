@@ -151,7 +151,7 @@
   - extended
   - shittersafari
   name: extended-title
-  showInVote: false #2boring2vote
+  showInVote: true #Ratbites, easier to control survival.
   description: extended-description
   rules:
   - PermaBrig # RatBite - Multi-Round brig system
@@ -167,7 +167,7 @@
   - greenshift
   - shittersafarideluxeedition
   name: greenshift-title
-  showInVote: false #4boring4vote
+  showInVote: true #If the masses want a greenshift there is a reason.
   description: greenshift-description
   rules:
   - PermaBrig # RatBite - Multi-Round brig system
@@ -255,7 +255,7 @@
   name: death-match-title
   description: death-match-description
   maxPlayers: 15
-  showInVote: true
+  showInVote: false #Ratbites, never voted for (should be reworked maybe or just moved as an admeme mode.)
   supportedMaps: DeathMatchMapPool
   rules:
     - DeathMatch31
