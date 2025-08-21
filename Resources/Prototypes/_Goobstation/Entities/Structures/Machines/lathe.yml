@@ -272,6 +272,7 @@
     - ServiceBoards
     - SharedBoards
     - CameraBoards
+    # - ServiceTools - Ratbite
     # Einstein Engines Packs
     - Translators
   - type: EmagLatheRecipes

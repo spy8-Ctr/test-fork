@@ -98,31 +98,28 @@
   - type: GhostRole
     name: abductor-agent-ghost-role-name
     description: abductor-agent-ghost-role-desc
-
-  mindRoles: 
+    mindRoles:
     - MindRoleGhostRoleTeamAntagonist
-  # requirements:
+  # requirements: # Ratbite - Start
   # - !type:OverallPlaytimeRequirement
   #   time: 18000 #5 hours
   # - !type:DepartmentTimeRequirement
   #   department: Security
   #   time: 10800 #3 hours - Ratbite - End
-
-# Ratbite TF is this?
-#  - type: RandomMetadata
-#    nameSegments:
-#      - AbductorAgentPrefix
-#      - AbductorNames
-#  - type: Tag # Ignore AbductorScientist tag
-#    tags:
- #     - Abductor
-#      - CanPilot
-#      - FootstepSound
-#      - DoorBumpOpener
-#  - type: AbductorScientist # Should be removed when we have proper teleportation system
-#  - type: Loadout
- #   prototypes:
- #     - AbductorAgentGear
+  - type: RandomMetadata
+    nameSegments:
+      - AbductorAgentPrefix
+      - AbductorNames
+  - type: Tag # Ignore AbductorScientist tag
+    tags:
+      - Abductor
+      - CanPilot
+      - FootstepSound
+      - DoorBumpOpener
+  - type: AbductorScientist # Should be removed when we have proper teleportation system
+  - type: Loadout
+    prototypes:
+      - AbductorAgentGear
 
 # Gearsets
 

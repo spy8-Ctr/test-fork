@@ -148,7 +148,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: ClothingModsuitAtmostechPowerCell # Goob edit
+      - id: ClothingOuterHardsuitAtmos #Ratbites, atmos hardsuit supreme
       - id: OxygenTankFilled
       - id: NitrogenTankFilled
       - id: ClothingMaskGasAtmos

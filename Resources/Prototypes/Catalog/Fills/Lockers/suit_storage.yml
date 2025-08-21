@@ -140,7 +140,7 @@
     contents:
         - id: OxygenTankFilled
         - id: NitrogenTankFilled
-        - id: ClothingModsuitAtmostechPowerCell
+        - id: ClothingOuterHardsuitAtmos #Ratbites, atmos hardsuit supreme
         - id: ClothingMaskBreath
   - type: AccessReader
     access: [["Atmospherics"]]

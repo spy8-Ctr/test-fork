@@ -233,6 +233,7 @@
       children:
       - id: ClothingNeckCloakHerald
       - id: ClothingHeadHelmetTemplar
+      - id: MoblileSpeaker #Ratbite
       # Cloaks
       - !type:GroupSelector
         children:
