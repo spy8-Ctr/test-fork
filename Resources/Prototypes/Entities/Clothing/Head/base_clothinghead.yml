@@ -224,6 +224,9 @@
   - type: TemperatureProtection
     heatingCoefficient: 0.2
     coolingCoefficient: 0.2
+  - type: IgniteFromGasImmunity # EE Plasmeme Change
+    parts:
+    - Head
   - type: IngestionBlocker
   - type: Clothing
     #Copies ClothingHeadHardsuitBase behavior
@@ -235,6 +238,7 @@
     tags:
     - WhitelistChameleon
     - HelmetEVA
+    - PlasmamanSafe # EE Plasmeme Change
   - type: IdentityBlocker
   - type: HideLayerClothing
     slots:
@@ -270,6 +274,11 @@
   - type: TemperatureProtection
     heatingCoefficient: 0.1
     coolingCoefficient: 0.1
+  - type: FireProtection # EE Plasmeme Change
+    reduction: 0.2
+  - type: IgniteFromGasImmunity
+    parts:
+    - Head
   - type: Armor
     coverage:
     - Head
@@ -291,6 +300,7 @@
   - type: Tag
     tags:
     - WhitelistChameleon
+    - PlasmamanSafe # EE Plasmeme Change
   - type: IdentityBlocker
   - type: HideLayerClothing
     slots:
