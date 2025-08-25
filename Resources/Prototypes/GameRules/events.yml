@@ -151,7 +151,7 @@
     - id: AnomalySpawn
     - id: BluespaceArtifact
     - id: BluespaceLocker
-    - id: BreakerFlip
+    #- id: BreakerFlip #RatBite
     - id: BureaucraticError
     - id: ClericalError
     - id: CockroachMigration
@@ -162,7 +162,7 @@
     - id: MassHallucinations
     - id: MimicVendorRule
     - id: MouseMigration
-    - id: PowerGridCheck
+    #- id: PowerGridCheck #RatBite
     - id: RandomSentience
     - id: SlimesSpawn
     - id: SolarFlare
@@ -333,7 +333,7 @@
   id: ClosetSkeleton
   components:
   - type: StationEvent
-    weight: 5
+    weight: 3
     duration: 1
     minimumPlayers: 10
     eventType: Chaotic # Goobstation
@@ -1003,7 +1003,7 @@
   id: DerelictCyborgSpawn
   components:
   - type: StationEvent
-    weight: 5
+    weight: 1
     earliestStart: 15
     reoccurrenceDelay: 20
     minimumPlayers: 4
