@@ -188,7 +188,6 @@
   id: LockerFillCaptainNoLaser
   table: !type:AllSelector
     children:
-    - id: CaptainIDCard
     - id: CigarGoldCase
       prob: 0.25
     - id: ClothingBeltSheathFilled
@@ -286,7 +285,6 @@
     - id: ClothingHeadsetAltCommand # Goobstation
     - id: ClothingNeckGoldmedal
     - id: DoorRemoteService
-    - id: HoPIDCard
     - id: IDComputerCircuitboard
     - id: ComputerFundingAllocationFlatpack # Goobstation
     - id: ComputerCargoRequestServiceFlatpack # Goobstation
@@ -575,11 +573,38 @@
   id: LockerFreezerVaultFilled
   suffix: Vault, Locked
   parent: LockerFreezerBase
+  name: NT Vault Freezer Unit
+  description: A reinforced freezer equally good at protecting command and cold cuts from nuclear explosions.
   components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 2000
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 1000
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -6
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          SheetSteel1:
+            min: 1
+            max: 2
   - type: AccessReader
     access: [ [ "Command" ] ]
   - type: StorageFill
     contents:
+    - id: CaptainIDCard
     - id: WeaponRevolverDeckard
     - id: JetpackBlue
     - id: SpaceCash1000
