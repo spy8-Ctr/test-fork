@@ -227,6 +227,11 @@
       - id: ClothingUniformJumpsuitLoungewear
       - id: ClothingHeadHatCowboyRed
       - id: ClothingShoesSkates #GoobStation
+    #Patreon Plushies, RB
+    - !type:AllSelector
+      - id: MmarPlushie #Ratbites
+      - id: PlushieAxer #Ratbites
+      - id: SmokeyPlushie #Ratbites
     # Uncommon Group
     - !type:GroupSelector
       weight: 23
