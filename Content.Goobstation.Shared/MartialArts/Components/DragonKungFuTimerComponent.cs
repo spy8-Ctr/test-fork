@@ -17,8 +17,8 @@ public sealed partial class DragonKungFuTimerComponent : Component
     public float MinVelocitySquared = 0.25f;
 
     [DataField]
-    public TimeSpan PauseDuration = TimeSpan.FromSeconds(1f);
+    public TimeSpan PauseDuration = TimeSpan.FromSeconds(0.25f);
 
     [DataField]
-    public TimeSpan BuffLength = TimeSpan.FromSeconds(1f);
+    public TimeSpan BuffLength = TimeSpan.FromSeconds(0.66f);
 }
