@@ -59,6 +59,7 @@
     - id: OmnimedTool
     - id: HandheldCrewMonitorBSO
     - id: BlueshieldUndeterminedWeapon
+    - id: BlueshieldUndeterminedHardsuit #RatBite
 
 - type: entity
   id: LockerBlueshieldOfficerFilled
