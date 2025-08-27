@@ -44640,13 +44640,6 @@ entities:
     - type: Transform
       pos: 2.6220274,21.009964
       parent: 30
-- proto: CaptainIDCard
-  entities:
-  - uid: 23195
-    components:
-    - type: Transform
-      pos: -20.492418,30.561455
-      parent: 30
 - proto: CarbonDioxideCanister
   entities:
   - uid: 8772

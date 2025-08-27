@@ -28893,13 +28893,6 @@ entities:
     - type: Transform
       pos: 7.5679626,-16.149172
       parent: 4812
-- proto: CaptainIDCard
-  entities:
-  - uid: 2588
-    components:
-    - type: Transform
-      pos: -12.545029,27.590694
-      parent: 4812
 - proto: CarbonDioxideCanister
   entities:
   - uid: 9133

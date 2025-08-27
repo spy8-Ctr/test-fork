@@ -8,6 +8,9 @@
   icon: "JobIconPrisoner"
   supervisors: job-supervisors-security
   canBeAntag: true
+  special:
+  - !type:AddImplantSpecial
+    implants: [ TrackingImplant ] #Ratbite Prisoners now can be tracked
 
 - type: startingGear
   id: PrisonerGear

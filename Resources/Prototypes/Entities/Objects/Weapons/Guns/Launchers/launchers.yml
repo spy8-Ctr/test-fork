@@ -505,6 +505,9 @@
   - type: ClothingSpeedModifier #Look at the size of this thing, absolute unit to carry on you
     walkModifier: 0.7
     sprintModifier: 0.7
+  - type: HeldSpeedModifier
+    walkModifier: 0.5 # RatBite holding it is slow
+    sprintModifier: 0.5 # RatBite
 
 # Admeme
 - type: entity

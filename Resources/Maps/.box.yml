@@ -61648,13 +61648,6 @@ entities:
     - type: Transform
       pos: 74.631615,-20.414675
       parent: 8364
-- proto: CaptainIDCard
-  entities:
-  - uid: 5329
-    components:
-    - type: Transform
-      pos: 8.491884,-16.71644
-      parent: 8364
 - proto: CarbonDioxideCanister
   entities:
   - uid: 21303
