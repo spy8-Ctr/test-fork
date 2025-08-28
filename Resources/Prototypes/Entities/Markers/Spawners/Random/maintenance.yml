@@ -167,7 +167,7 @@
       - id: ClothingShoesFakeJordans
       - id: ClothingUnderSocksCoder
       - id: ClothingHeadHatSquid
-      # Animal Masks
+      # Animal Masks (like rats)
       - !type:GroupSelector
         children:
         - id: ClothingMaskRat
@@ -227,11 +227,6 @@
       - id: ClothingUniformJumpsuitLoungewear
       - id: ClothingHeadHatCowboyRed
       - id: ClothingShoesSkates #GoobStation
-    #Patreon Plushies, RB
-    - !type:AllSelector
-      - id: MmarPlushie #Ratbites
-      - id: PlushieAxer #Ratbites
-      - id: SmokeyPlushie #Ratbites
     # Uncommon Group
     - !type:GroupSelector
       weight: 23
